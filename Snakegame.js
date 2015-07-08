@@ -70,16 +70,16 @@ var chopTail = function() {
         if (board[i][j] === 5) {
             board[i][j] = 0;
             return;
-        }else if (board[i][j] === 1 && board[i][j+1] === 0) {
+        }else if (board[i][j] === 1 && board[i][j+1] <= 0) {
             board[i][j] = 0;
             return;
-        }else if (board[i][j] === 2 && board[i][j-1] === 0) {
+        }else if (board[i][j] === 2 && board[i][j-1] <= 0) {
             board[i][j] = 0;
             return;
-        }else if (board[i][j] === 3 && board[i+1][j] === 0) {
+        }else if (board[i][j] === 3 && board[i+1][j] <= 0) {
             board[i][j] = 0;
             return;
-        }else if (board[i][j] === 4 && board[i-1][j] === 0) {
+        }else if (board[i][j] === 4 && board[i-1][j] <= 0) {
             board[i][j] = 0;
             return;
         }
@@ -110,11 +110,26 @@ var oppositeCheck = function(x,y) {
   }
 }
 
+//Check win
+var checkWin = function () {
+  var win = true;
+  for (i=0; i < xaxis+2*wallthickness; i+=1) {
+    for (j=0; j < yaxis+2*wallthickness; j+=1) {
+      if (board[i][j] <= 0) {
+        win = false;
+      }
+    }
+  }
+  return win
+}
+
+
 
 //Running
 var gameStatus = "inPlay";
 var counter = 0;
 var needGen = 1
+
 while (gameStatus == "inPlay") {
   console.log(board);
   console.log("Please input your move");
@@ -137,6 +152,12 @@ while (gameStatus == "inPlay") {
       }
     }
 
+    if (counter > 0 && gameStatus == "inPlay" ) {
+      counter = counter -1;
+    }else if (counter === 0) {
+      chopTail();
+    }
+
     if (gameStatus == "inPlay" ) {
       if (movement[0] == 1) {
         goLeft();
@@ -147,12 +168,12 @@ while (gameStatus == "inPlay") {
       }else if (movement[3] == 1) {
         goDown();
       }
-      if (counter > 0) {
-        counter = counter -1;
-      }else if (counter === 0) {
-        chopTail();
+      if (checkWin() === true) {
+        gameStatus = "Won";
+        console.log("YOU WON!!!!NEXT LEVEL!!!");
       }
-      if (needGen === 1) {
+
+      if (needGen === 1 && gameStatus == "inPlay" ) {
           foodGen();
           needGen = 0;
       }
