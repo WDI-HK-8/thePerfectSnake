@@ -11,6 +11,7 @@ $(document).ready(function() {
   var counter = 0;
   var needGen = 1;
   var head = [2,2];
+  var tail = [null,null];
   var movement = [0,0,0,0]; //[left,right,up,down]
 
   //********** Functions **********
@@ -50,29 +51,63 @@ $(document).ready(function() {
           head[0]+=1;
         };
 
+        //Chop tail (old version with surrounded bug)
+        // var chopTail = function() {
+        //   for (i = 0; i < xaxis+2*wallthickness; i+=1) {
+        //     for (j = 0; j < yaxis+2*wallthickness; j+=1) {
+        //         if (board[i][j] === 5) {
+        //             board[i][j] = 0;
+        //             return;
+        //         }else if (board[i][j] === 1 && board[i][j+1] <= 0) {
+        //             board[i][j] = 0;
+        //             return;
+        //         }else if (board[i][j] === 2 && board[i][j-1] <= 0) {
+        //             board[i][j] = 0;
+        //             return;
+        //         }else if (board[i][j] === 3 && board[i+1][j] <= 0) {
+        //             board[i][j] = 0;
+        //             return;
+        //         }else if (board[i][j] === 4 && board[i-1][j] <= 0) {
+        //             board[i][j] = 0;
+        //             return;
+        //         }
+        //     }
+        //   }
+        // };
+
+
+
+
         //Chop tail
         var chopTail = function() {
           for (i = 0; i < xaxis+2*wallthickness; i+=1) {
             for (j = 0; j < yaxis+2*wallthickness; j+=1) {
                 if (board[i][j] === 5) {
-                    board[i][j] = 0;
-                    return;
+                    tail = [i,j];
+                    console.log(tail)
                 }else if (board[i][j] === 1 && board[i][j+1] <= 0) {
-                    board[i][j] = 0;
-                    return;
+                    tail = [i,j];
                 }else if (board[i][j] === 2 && board[i][j-1] <= 0) {
-                    board[i][j] = 0;
-                    return;
+                    tail = [i,j];
                 }else if (board[i][j] === 3 && board[i+1][j] <= 0) {
-                    board[i][j] = 0;
-                    return;
+                    tail = [i,j];
                 }else if (board[i][j] === 4 && board[i-1][j] <= 0) {
-                    board[i][j] = 0;
-                    return;
+                    tail = [i,j];
                 }
             }
           }
+          if (counter > 0 && gameStatus == "inPlay" ) {
+            counter = counter - 1;
+          }else if (counter === 0) {
+            board[tail[0]][tail[1]] = 0;
+          }
         };
+
+
+
+
+
+
 
         //Check if food is nearby [left,right,up,down]
         var checkStuff = function() {
@@ -123,15 +158,16 @@ $(document).ready(function() {
                 alert("YOU LOSER!!!!");
               }else if (movement[i] === 1 && checkStuff()[i] < 0) {
                 counter = counter - checkStuff()[i];
-                needGen = 1
+                needGen = 1;
               }
             }
-
-            if (counter > 0 && gameStatus == "inPlay" ) {
-              counter = counter -1;
-            }else if (counter === 0) {
-              chopTail();
-            }
+            chopTail();
+            // if (counter > 0 && gameStatus == "inPlay" ) {
+            //   counter = counter -1;
+            //
+            // }else if (counter === 0) {
+            //   chopTail();
+            // }
 
             if (gameStatus == "inPlay" ) {
               if (movement[0] == 1) {
@@ -145,7 +181,7 @@ $(document).ready(function() {
               }
               if (checkWin() === true) {
                 gameStatus = "Won";
-                alert("YOU WON!!!!NEXT LEVEL!!!");
+                alert("Perfect Snake! Well done!!");
               }
 
               if (needGen === 1 && gameStatus == "inPlay" ) {
@@ -173,7 +209,7 @@ $(document).ready(function() {
             }
           }
           movement = [0,0,0,0];
-          console.log('reset')
+
         }
 
 
@@ -194,10 +230,12 @@ $(document).ready(function() {
         //********** Board initialize **********
 
         $('.form-inline button').click(function() {
+          // $('tbody').empty();
           if (parseInt($('#xaxisInput').val()) >= 2) { xaxis = parseInt($('#xaxisInput').val())};
           if (parseInt($('#yaxisInput').val()) >= 2) { yaxis = parseInt($('#yaxisInput').val())};
           if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
           if (parseInt($('#foodValueInput').val()) >=1) { foodvalue = parseInt($('#foodValueInput').val())};
+          if (parseInt($('#initialC').val()) >= 1) { counter = parseInt($('#initialC').val()) - 1};
           var x = xaxis + 2 * wallthickness;
           var y = yaxis + 2 * wallthickness;
           for (i = 1; i <= y; i +=1 ) {
@@ -255,6 +293,20 @@ $(document).ready(function() {
           if (e.keyCode == 38) {movement[2] = 1; running()};
           if (e.keyCode == 40) {movement[3] = 1; running()};
         });
+
+
+
+
+
+//********** No Scroll plug-in **********//
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
+
 
 
 
