@@ -13,6 +13,8 @@ $(document).ready(function() {
   var head = [2,2];
   var tail = [null,null];
   var movement = [0,0,0,0]; //[left,right,up,down]
+  var recordingTime = false;
+  var time = 0;
 
   //********** Functions **********
 
@@ -20,11 +22,11 @@ $(document).ready(function() {
         var foodGen = function() {
           var i = Math.floor(Math.random() * xaxis) + wallthickness;
           var j = Math.floor(Math.random() * yaxis) + wallthickness;
-          while (board[i][j] !== 0) {
+          while (board[j][i] !== 0) {
             i = Math.floor(Math.random() * xaxis + wallthickness);
             j = Math.floor(Math.random() * yaxis + wallthickness);
           }
-          board[i][j] = (-foodvalue);
+          board[j][i] = (-foodvalue);
         };
 
         //Input left
@@ -82,17 +84,17 @@ $(document).ready(function() {
         var chopTail = function() {
           for (i = 0; i < xaxis+2*wallthickness; i+=1) {
             for (j = 0; j < yaxis+2*wallthickness; j+=1) {
-                if (board[i][j] === 5) {
-                    tail = [i,j];
+                if (board[j][i] === 5) {
+                    tail = [j,i];
                     console.log(tail)
-                }else if (board[i][j] === 1 && board[i][j+1] <= 0) {
-                    tail = [i,j];
-                }else if (board[i][j] === 2 && board[i][j-1] <= 0) {
-                    tail = [i,j];
-                }else if (board[i][j] === 3 && board[i+1][j] <= 0) {
-                    tail = [i,j];
-                }else if (board[i][j] === 4 && board[i-1][j] <= 0) {
-                    tail = [i,j];
+                }else if (board[j][i] === 1 && board[j][i+1] <= 0) {
+                    tail = [j,i];
+                }else if (board[j][i] === 2 && board[j][i-1] <= 0) {
+                    tail = [j,i];
+                }else if (board[j][i] === 3 && board[j+1][i] <= 0) {
+                    tail = [j,i];
+                }else if (board[j][i] === 4 && board[j-1][i] <= 0) {
+                    tail = [j,i];
                 }
             }
           }
@@ -145,6 +147,23 @@ $(document).ready(function() {
           return win
         }
 
+        //Timer
+        $(document).keydown(function (e) {
+          if([37, 38, 39, 40].indexOf(e.keyCode) > -1 && recordingTime === false) {
+            var timer = setInterval(function(){
+              time += 1;
+              recordingTime = true;
+               if(gameStatus !== "inPlay") {
+                 clearInterval(timer);
+               };
+            }, 10);
+          }
+        })
+
+
+
+
+
 
 
         //Running
@@ -155,13 +174,13 @@ $(document).ready(function() {
             for (i = 0; i < 4; i+=1) {
               if (movement[i] === 1 && checkStuff()[i] > 0) {
                 gameStatus = "crashed";
-                alert("YOU LOSER!!!!");
+                alert("You Lost :((( Time taken: " + (time/100) + "s");
               }else if (movement[i] === 1 && checkStuff()[i] < 0) {
                 counter = counter - checkStuff()[i];
                 needGen = 1;
               }
             }
-            chopTail();
+
             // if (counter > 0 && gameStatus == "inPlay" ) {
             //   counter = counter -1;
             //
@@ -170,6 +189,7 @@ $(document).ready(function() {
             // }
 
             if (gameStatus == "inPlay" ) {
+              chopTail();
               if (movement[0] == 1) {
                 goLeft();
               }else if (movement[1] == 1) {
@@ -181,7 +201,7 @@ $(document).ready(function() {
               }
               if (checkWin() === true) {
                 gameStatus = "Won";
-                alert("Perfect Snake! Well done!!");
+                alert("Perfect Snake! Well done!! Time taken: " + (time/100) + "s");
               }
 
               if (needGen === 1 && gameStatus == "inPlay" ) {
@@ -211,10 +231,6 @@ $(document).ready(function() {
           movement = [0,0,0,0];
 
         }
-
-
-
-
 
 
 
@@ -287,6 +303,7 @@ $(document).ready(function() {
 
         //********** Running **********
 
+
         $(document).keydown(function (e) {
           if (e.keyCode == 37) {movement[0] = 1; running();};
           if (e.keyCode == 39) {movement[1] = 1; running()};
@@ -301,7 +318,7 @@ $(document).ready(function() {
 //********** No Scroll plug-in **********//
 window.addEventListener("keydown", function(e) {
     // space and arrow keys
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    if([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
     }
 }, false);

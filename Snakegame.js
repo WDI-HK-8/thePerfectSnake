@@ -9,18 +9,19 @@ for (i=0; i < xaxis+2*wallthickness; i+=1) {
     board[i][j] = 0;
   }
 }
-for (i=0; i < yaxis+2*wallthickness; i+=1) {
+for (i=0; i < xaxis+2*wallthickness; i+=1) {
     for (j=0; j < wallthickness; j+=1) {
         board[i][j] = 8;
         board[i][yaxis+2*wallthickness-1-j] = 8;
     }
 }
-for (i=0; i < xaxis+2*wallthickness; i+=1) {
+for (i=0; i < yaxis+2*wallthickness; i+=1) {
     for (j=0; j < wallthickness; j+=1) {
         board[j][i] = 8;
         board[xaxis+2*wallthickness-1-j][i] = 8;
     }
 }
+
 
 //Initial head
 var head = [2,2];
