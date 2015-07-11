@@ -1,12 +1,59 @@
+body {
+    background-color: #6E86E6;
+}
 
-h1, h5{
+h1 {
+  margin: 0px;
+  padding: 0px;
+  color: red
+}
+h5{
   text-align: center;
 }
 .form-inline {
   text-align: center;
 }
 
+.navbar {
+  background-color: #65247F;
+}
 
 td {
   border: 2px solid black;
+}
+
+#main {
+  margin-left: 345px;
+}
+.navbar {
+  min-height:50px;
+}
+.sidebar {
+  width: 345px;
+  border-right: 1px solid white
+}
+
+
+.nav-tabs {
+  border: none;
+  min-height:50px;
+}
+.nav-tabs a{
+  min-height: 50px;
+}
+
+
+.sidebar {
+  background-color: #8C6DD7;
+}
+
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  background-color:#8C6DD7;
+  box-shadow: 0 1px 0 #8C6DD7;
+}
+
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+  padding: 0px
 }

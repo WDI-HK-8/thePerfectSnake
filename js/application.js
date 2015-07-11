@@ -226,7 +226,7 @@ $(document).ready(function() {
 
         //********** Board initialize **********
 
-        $('.form-inline button').click(function() {
+        $('#buildButton').click(function() {
           // $('tbody').empty();
           if (parseInt($('#xaxisInput').val()) >= 2) { xaxis = parseInt($('#xaxisInput').val())};
           if (parseInt($('#yaxisInput').val()) >= 2) { yaxis = parseInt($('#yaxisInput').val())};
