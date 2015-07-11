@@ -17,6 +17,8 @@ $(document).ready(function() {
   var time = 0;
   var interval = 0;
   var autoMoving = false;
+  var gridCovered;
+  var numberOfMoves = 0
 
   //********** Functions **********
 
@@ -131,6 +133,7 @@ $(document).ready(function() {
           if([37, 38, 39, 40].indexOf(e.keyCode) > -1 && recordingTime === false) {
             var timer = setInterval(function(){
               time += 1;
+              $('#stopWatch').text(time/100);
               recordingTime = true;
                if(gameStatus !== "inPlay") {
                  clearInterval(timer);
@@ -194,26 +197,30 @@ $(document).ready(function() {
               }
             }
             colorTranslate();
+            numberOfMoves++;
+            $('#numberOfMoves').text(numberOfMoves);
         }
 
-        //Translate into colors
+        //Translate into colors + Calculate grid covered
 
         var colorTranslate = function () {
+          gridCovered = 0;
           for (i=0; i < xaxis+2*wallthickness; i+=1) {
               for (j=0; j < yaxis+2*wallthickness; j+=1) {
                   if (board[j][i] === 8) {
                     $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'black'})
                   }else if (board[j][i] > 0 ){
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'}); gridCovered++
                   }else if (board[j][i] < 0 ){
                     $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'red'})
                   }else if (board[j][i] === 0 ){
                     $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'white'})
                   }if (j === head[0] && i === head[1]) {
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'green'})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'green'});
                   }
               }
           }
+          $('#gridCovered').text(gridCovered)
       }
 
 

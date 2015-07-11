@@ -2,14 +2,12 @@ body {
     background-color: #6E86E6;
 }
 
-h1 {
+.navbar-header h1 {
   margin: 0px;
   padding: 0px;
   color: red
 }
-h5{
-  text-align: center;
-}
+
 .form-inline {
   text-align: center;
 }
