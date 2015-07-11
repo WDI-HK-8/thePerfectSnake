@@ -15,6 +15,8 @@ $(document).ready(function() {
   var movement = [0,0,0,0]; //[left,right,up,down]
   var recordingTime = false;
   var time = 0;
+  var interval = 0;
+  var autoMoving = false;
 
   //********** Functions **********
 
@@ -53,29 +55,6 @@ $(document).ready(function() {
           head[0]+=1;
         };
 
-        //Chop tail (old version with surrounded bug)
-        // var chopTail = function() {
-        //   for (i = 0; i < xaxis+2*wallthickness; i+=1) {
-        //     for (j = 0; j < yaxis+2*wallthickness; j+=1) {
-        //         if (board[i][j] === 5) {
-        //             board[i][j] = 0;
-        //             return;
-        //         }else if (board[i][j] === 1 && board[i][j+1] <= 0) {
-        //             board[i][j] = 0;
-        //             return;
-        //         }else if (board[i][j] === 2 && board[i][j-1] <= 0) {
-        //             board[i][j] = 0;
-        //             return;
-        //         }else if (board[i][j] === 3 && board[i+1][j] <= 0) {
-        //             board[i][j] = 0;
-        //             return;
-        //         }else if (board[i][j] === 4 && board[i-1][j] <= 0) {
-        //             board[i][j] = 0;
-        //             return;
-        //         }
-        //     }
-        //   }
-        // };
 
 
 
@@ -160,17 +139,31 @@ $(document).ready(function() {
           }
         })
 
+        //Speed control system
 
-
-
-
-
+        var speedControl = function() {
+            if (interval === 0 && oppositeCheck((movement.indexOf(1) + 1) , board[head[0]][head[1]]) === false) {
+                running();
+                movement = [0,0,0,0];
+            }
+            else if (interval !== 0 && autoMoving === false) {
+                autoMoving = true;
+                var autoMove = setInterval(function(){
+                    running();
+                    if(gameStatus !== "inPlay") {
+                      clearInterval(autoMove);
+                    };
+                }, interval);
+            }
+            if (oppositeCheck((movement.indexOf(1) + 1) , board[head[0]][head[1]]) === true) {
+              movement = [0,0,0,0];
+              movement[board[head[0]][head[1]]-1] = 1;
+            }
+        }
 
         //Running
 
         var running = function() {
-          if (oppositeCheck((movement.indexOf(1) + 1) , board[head[0]][head[1]]) === false) {
-
             for (i = 0; i < 4; i+=1) {
               if (movement[i] === 1 && checkStuff()[i] > 0) {
                 gameStatus = "crashed";
@@ -180,14 +173,6 @@ $(document).ready(function() {
                 needGen = 1;
               }
             }
-
-            // if (counter > 0 && gameStatus == "inPlay" ) {
-            //   counter = counter -1;
-            //
-            // }else if (counter === 0) {
-            //   chopTail();
-            // }
-
             if (gameStatus == "inPlay" ) {
               chopTail();
               if (movement[0] == 1) {
@@ -203,37 +188,33 @@ $(document).ready(function() {
                 gameStatus = "Won";
                 alert("Perfect Snake! Well done!! Time taken: " + (time/100) + "s");
               }
-
               if (needGen === 1 && gameStatus == "inPlay" ) {
                   foodGen();
                   needGen = 0;
               }
             }
-
-            //Translate colors
-            for (i=0; i < xaxis+2*wallthickness; i+=1) {
-                for (j=0; j < yaxis+2*wallthickness; j+=1) {
-                    if (board[j][i] === 8) {
-                      $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'black'})
-                    }else if (board[j][i] > 0 ){
-                      $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'})
-                    }else if (board[j][i] < 0 ){
-                      $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'red'})
-                    }else if (board[j][i] === 0 ){
-                      $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'white'})
-                    }if (j === head[0] && i === head[1]) {
-                      $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'green'})
-                    }
-                }
-
-            }
-          }
-          movement = [0,0,0,0];
-
+            colorTranslate();
         }
 
+        //Translate into colors
 
-
+        var colorTranslate = function () {
+          for (i=0; i < xaxis+2*wallthickness; i+=1) {
+              for (j=0; j < yaxis+2*wallthickness; j+=1) {
+                  if (board[j][i] === 8) {
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'black'})
+                  }else if (board[j][i] > 0 ){
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'})
+                  }else if (board[j][i] < 0 ){
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'red'})
+                  }else if (board[j][i] === 0 ){
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'white'})
+                  }if (j === head[0] && i === head[1]) {
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'green'})
+                  }
+              }
+          }
+      }
 
 
 
@@ -252,6 +233,7 @@ $(document).ready(function() {
           if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
           if (parseInt($('#foodValueInput').val()) >=1) { foodvalue = parseInt($('#foodValueInput').val())};
           if (parseInt($('#initialC').val()) >= 1) { counter = parseInt($('#initialC').val()) - 1};
+          if ($('#moveInterval').val() > 0) { interval = $('#moveInterval').val()*1000};
           var x = xaxis + 2 * wallthickness;
           var y = yaxis + 2 * wallthickness;
           for (i = 1; i <= y; i +=1 ) {
@@ -269,7 +251,6 @@ $(document).ready(function() {
               board[i][j] = 0;
             }
           }
-          //ok
           for (i=0; i < yaxis+2*wallthickness; i+=1) {
               for (j=0; j < wallthickness; j+=1) {
                   board[i][j] = 8;
@@ -285,17 +266,7 @@ $(document).ready(function() {
 
           //Initial head [x,y]
           board[head[0]][head[1]] = 5;
-
-          //Translate numbers to colors
-          for (i=0; i < xaxis+2*wallthickness; i+=1) {
-              for (j=0; j < yaxis+2*wallthickness; j+=1) {
-                  if (board[j][i] === 8) {
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'black'})
-                  }else if (board[j][i] === 5){
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'green'})
-                  }
-              }
-          }
+          colorTranslate();
         })
 
 
@@ -305,10 +276,11 @@ $(document).ready(function() {
 
 
         $(document).keydown(function (e) {
-          if (e.keyCode == 37) {movement[0] = 1; running();};
-          if (e.keyCode == 39) {movement[1] = 1; running()};
-          if (e.keyCode == 38) {movement[2] = 1; running()};
-          if (e.keyCode == 40) {movement[3] = 1; running()};
+          //key register
+          if (e.keyCode == 37) {movement = [1,0,0,0]; speedControl()};
+          if (e.keyCode == 39) {movement = [0,1,0,0]; speedControl()};
+          if (e.keyCode == 38) {movement = [0,0,1,0]; speedControl()};
+          if (e.keyCode == 40) {movement = [0,0,0,1]; speedControl()};
         });
 
 
