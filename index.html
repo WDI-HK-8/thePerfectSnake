@@ -37,17 +37,19 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="original">Original</div>
           <div role="tabpanel" class="tab-pane" id="arcade">Arcade</div>
-          <div role="tabpanel" class="tab-pane" id="multiplayer">Multoplayer</div>
 
 
 
-          <div role="tabpanel" class="tab-pane" id="custom">
-            <form class="form-horizontal">
-              <div class="form-group">
-                <label for="xaxis">X-Axis</label>
-                <input type="text" class="form-control" id="xaxisInput" placeholder="4">
-              </div>
-              <div class="form-group">
+          <div role="tabpanel" class="tab-pane" id="multiplayer">
+            <form class="form-horizontal playerNames">
+              <label>Player names</label>
+              <input type="text" class="form-control" placeholder="Player 1"><br>
+              <input type="text" class="form-control" placeholder="Player 2"><br>
+            </form>
+            <button type="button" id="addNewPlayerButton" class="btn btn-default">Add new player</button>
+
+
+              <!-- <div class="form-group">
                 <label for="yaxis">Y-Axis</label>
                 <input type="text" class="form-control" id="yaxisInput" placeholder="4">
               </div>
@@ -67,17 +69,43 @@
                 <label for="moveInterval">Interval</label>
                 <input type="text" class="form-control" id="moveInterval" placeholder="0">
               </div>
+              <button type="button" id="buildButton" class="btn btn-default">Build</button> -->
+
+
+
+          </div>
+
+
+
+          <div role="tabpanel" class="tab-pane" id="custom">
+            <form class="form-horizontal">
+              <label for="xaxis">X-Axis</label>
+              <input type="text" class="form-control" id="xaxisInput" placeholder="4"><br>
+              <label for="yaxis">Y-Axis</label>
+              <input type="text" class="form-control" id="yaxisInput" placeholder="4"><br>
+              <label for="wallT">Wall thickness</label>
+              <input type="text" class="form-control" id="wallThicknessInput" placeholder="1"><br>
+              <label for="foodV">Food value</label>
+              <input type="text" class="form-control" id="foodValueInput" placeholder="1"><br>
+              <label for="initialC">Starting length</label>
+              <input type="text" class="form-control" id="initialC" placeholder="1"><br>
+              <label for="moveInterval">Interval</label>
+              <input type="text" class="form-control" id="moveInterval" placeholder="0"><br>
               <button type="button" id="buildButton" class="btn btn-default">Build</button>
             </form>
             <div id="scoreBoard">
               <h1>Time</h1>
               <span id="stopWatch">0</span>
               <h1>Grid Covered</h1>
-              <span id="gridCovered">0</span>
+              <span id="gridCovered">0%</span>
               <h1>Number of moves</h1>
               <span id="numberOfMoves">0</span>
+              <button type="button" id="resetButton" class="btn btn-default">Reset</button>
             </div>
           </div>
+
+
+
         </div>
       </div>
     </div>

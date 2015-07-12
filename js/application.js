@@ -17,7 +17,7 @@ $(document).ready(function() {
   var time = 0;
   var interval = 0;
   var autoMoving = false;
-  var gridCovered;
+  var gridCovered = 1;
   var numberOfMoves = 0
 
   //********** Functions **********
@@ -220,7 +220,30 @@ $(document).ready(function() {
                   }
               }
           }
-          $('#gridCovered').text(gridCovered)
+          $('#gridCovered').text((gridCovered*100)/(xaxis*yaxis) + "% (" + gridCovered + " out of " + (xaxis*yaxis) + ")")
+      }
+
+      //Reset
+
+      var reset = function () {
+        board = [];
+        xaxis = 4;
+        yaxis = 4;
+        wallthickness = 1;
+        foodvalue = 1;
+        gameStatus = "inPlay";
+        counter = 0;
+        needGen = 1;
+        head = [2,2];
+        tail = [null,null];
+        movement = [0,0,0,0]; //[left,right,up,down]
+        recordingTime = false;
+        time = 0;
+        interval = 0;
+        autoMoving = false;
+        gridCovered = 1;
+        numberOfMoves = 0;
+        $('.table tbody').empty()
       }
 
 
@@ -229,10 +252,23 @@ $(document).ready(function() {
 
 
 
+      //********** Multiplayer mode **********
+
+        //Add new player
+        $('#addNewPlayerButton').click(function() {
+          $('.playerNames').append('<input type="text" class="form-control" placeholder="Player ' + ($('.playerNames input').length + 1) + '"><br>')
+        })
 
 
-        //********** Board initialize **********
 
+
+
+
+
+
+        //********** Custom mode **********
+
+        //Board Initialise
         $('#buildButton').click(function() {
           // $('tbody').empty();
           if (parseInt($('#xaxisInput').val()) >= 2) { xaxis = parseInt($('#xaxisInput').val())};
@@ -270,11 +306,16 @@ $(document).ready(function() {
                   board[yaxis+2*wallthickness-1-j][i] = 8;
               }
           }
-
-          //Initial head [x,y]
+          $('#numberOfMoves').text(numberOfMoves)
+          $('#stopWatch').text(time)
           board[head[0]][head[1]] = 5;
           colorTranslate();
         })
+
+      //Reset button
+      $('#resetButton').click(function() {
+        reset();
+      })
 
 
 
