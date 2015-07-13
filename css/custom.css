@@ -63,3 +63,20 @@ td {
 #scoreBoardCustom {
   display: none;
 }
+
+#nextPlayerButton {
+  display: none;
+}
+
+#scoreBoardMulti ul {
+  display:inline-block;
+  list-style-type: none;
+}
+
+#scoreBoardMulti {
+  display: none;
+}
+
+#resetButtonMulti {
+  display: none;
+}

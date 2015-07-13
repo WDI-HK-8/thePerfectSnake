@@ -46,7 +46,7 @@
               <input type="text" class="form-control" placeholder="Player 1">
               <input type="text" class="form-control" placeholder="Player 2">
             </form>
-            <button type="button" id="addNewPlayerButton" class="btn btn-default">Add new player</button>
+            <button type="button" id="addNewPlayerButton" class="btn btn-default">Add new player</button><br>
             <form class="form-horizontal">
               <label for="xaxisMulti">X-Axis</label>
               <input type="text" class="form-control" id="xaxisInputMulti" placeholder="4">
@@ -57,18 +57,19 @@
             <div id="scoreBoardMulti">
               <h1 id="whosTurn"></h1>
               <h1>Time</h1>
-              <span id="stopWatchMulti">0</span>
+              <span class="stopWatch">0</span>
               <h1>Grids Covered</h1>
-              <span id="gridsCoveredMulti">0%</span>
+              <span class="gridsCovered">0%</span>
               <h1>Number of moves</h1>
-              <span id="numberOfMovesMulti">0</span>
-              <button type="button" id="resetButton" class="btn btn-default">Reset</button>
+              <span class="numberOfMoves">0</span><br>
               <ul id="playerNames">
                 <li>Player</li>
               </ul>
               <ul id="timeRecords">
                 <li>Time</li>
               </ul>
+              <button type="button" id="nextPlayerButton" class="btn btn-default">Next Player</button>
+              <button type="button" id="resetButtonMulti" class="btn btn-default">Reset</button>
             </div>
 
 
@@ -97,12 +98,12 @@
             </form>
             <div id="scoreBoardCustom">
               <h1>Time</h1>
-              <span id="stopWatchCustom">0</span>
+              <span class="stopWatch">0</span>
               <h1>Grids Covered</h1>
-              <span id="gridsCoveredCustom">0%</span>
+              <span class="gridsCovered">0%</span>
               <h1>Number of moves</h1>
-              <span id="numberOfMoves">0</span>
-              <button type="button" id="resetButton" class="btn btn-default">Reset</button>
+              <span class="numberOfMoves">0</span><br>
+              <button type="button" id="resetButtonCustom" class="btn btn-default">Reset</button>
             </div>
           </div>
 

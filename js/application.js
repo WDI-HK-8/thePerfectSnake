@@ -7,7 +7,7 @@ $(document).ready(function() {
   var yaxis = 4;
   var wallthickness = 1;
   var foodvalue = 1;
-  var gameStatus = "inPlay";
+  var gameStatus = "idle";
   var counter = 0;
   var needGen = 1;
   var head = [2,2];
@@ -21,7 +21,8 @@ $(document).ready(function() {
   var numberOfMoves = 0;
   var playerNames = [];
   var playerTimes = [0];
-  var whoIsPlaying = 1;
+  var gameMode;
+  var index = 0 //Use only in multiplayer mode (index of who is playing)
 
   //********** Functions **********
 
@@ -125,10 +126,10 @@ $(document).ready(function() {
 
         //Timer
         $(document).keydown(function (e) {
-          if([37, 38, 39, 40].indexOf(e.keyCode) > -1 && recordingTime === false) {
+          if([37, 38, 39, 40].indexOf(e.keyCode) > -1 && recordingTime === false && gameStatus === 'inPlay') {
             var timer = setInterval(function(){
               time += 1;
-              $('#stopWatchCustom').text(time/100);
+                $('.stopWatch').text(time/100);
               recordingTime = true;
                if(gameStatus !== "inPlay") {
                  clearInterval(timer);
@@ -163,7 +164,9 @@ $(document).ready(function() {
             for (i = 0; i < 4; i+=1) {
               if (movement[i] === 1 && checkStuff()[i] > 0) {
                 gameStatus = "crashed";
-                playerTimes[playerTimes.indexOf(0)] = 'Lost';
+                if (gameMode === 'Multiplayer') {
+                  multiplayerAddOns();
+                }
                 alert("You Lost :((( Time taken: " + (time/100) + "s");
               }else if (movement[i] === 1 && checkStuff()[i] < 0) {
                 counter = counter - checkStuff()[i];
@@ -184,7 +187,10 @@ $(document).ready(function() {
               if (checkWin() === true) {
                 gameStatus = "Won";
                 alert("Perfect Snake! Well done!! Time taken: " + (time/100) + "s");
-                playerTimes[playerTimes.indexOf(0)] = (time/100)
+                if (gameMode === 'Multiplayer') {
+                  multiplayerAddOns();
+                }
+
               }
               if (needGen === 1 && gameStatus == "inPlay" ) {
                   foodGen();
@@ -193,7 +199,7 @@ $(document).ready(function() {
             }
             colorTranslate();
             numberOfMoves++;
-            $('#numberOfMoves').text(numberOfMoves);
+            $('.numberOfMoves').text(numberOfMoves);
         }
 
         //Translate into colors + Calculate grid covered
@@ -214,7 +220,7 @@ $(document).ready(function() {
                   }
               }
           }
-          $('#gridsCoveredCustom').text((gridsCovered*100)/(xaxis*yaxis) + "% (" + gridsCovered + " out of " + (xaxis*yaxis) + ")")
+          $('.gridsCovered').text((gridsCovered*100)/(xaxis*yaxis) + "% (" + gridsCovered + " out of " + (xaxis*yaxis) + ")")
       }
 
       //Reset
@@ -224,7 +230,7 @@ $(document).ready(function() {
         yaxis = 4;
         wallthickness = 1;
         foodvalue = 1;
-        gameStatus = "inPlay";
+        gameStatus = "idle";
         counter = 0;
         needGen = 1;
         head = [2,2];
@@ -275,7 +281,21 @@ $(document).ready(function() {
         colorTranslate();
       }
 
+      //Multiplayer add-ons
+      var multiplayerAddOns = function() {
+        if (gameStatus === "crashed") {
+          playerTimes[index] = 'Lost';
+          $('#timeRecords li:nth-child(' + (index + 2) + ')').text('Lost')
+        }else if (gameStatus === "Won") {
+          playerTimes[index] = (time/100);
+          $('#timeRecords li:nth-child(' + (index + 2) + ')').text(time/100)
+        }
+        if ((index + 1) < $('.playerList input').length) {
+          $('#nextPlayerButton').show()
+        }else {
 
+        }
+      }
 
 
       //********** Multiplayer mode **********
@@ -287,8 +307,13 @@ $(document).ready(function() {
 
         //Board Initialise
         $('#startButtonMulti').click(function() {
+          $('#scoreBoardMulti').show();
+          $('#multiplayer form').hide();
+          $('#addNewPlayerButton').hide();
+          gameStatus = "inPlay";
+          gameMode = 'Multiplayer';
           for (i = 0; i < $('.playerList input').length; i++) {
-            playerNames[i] = "Player" + (i+1);
+            playerNames[i] = "Player " + (i+1);
             playerTimes[i] = 0;
             if ($('.playerList input:nth-child('+ (i+2) + ')').val() !== '') {
               playerNames[i] = $('.playerList input:nth-child('+ (i+2) + ')').val();
@@ -299,16 +324,45 @@ $(document).ready(function() {
           if (parseInt($('#xaxisInputMulti').val()) >= 2) { xaxis = parseInt($('#xaxisInputMulti').val())};
           if (parseInt($('#yaxisInputMulti').val()) >= 2) { yaxis = parseInt($('#yaxisInputMulti').val())};
           generateBoard();
-
+          $('#whosTurn').text(playerNames[0] + 's turn')
         })
 
+        //Next player button
+        $('#nextPlayerButton').click(function() {
+          index++;
+          $('#whosTurn').text(playerNames[index] + 's turn');
+          gameStatus = 'inPlay';
+          board = [];
+          $('.table tbody').empty();
+          counter = 0;
+          needGen = 1;
+          head = [2,2];
+          tail = [null,null];
+          movement = [0,0,0,0]; //[left,right,up,down]
+          recordingTime = false;
+          time = 0;
+          gridsCovered = 1;
+          numberOfMoves = 0;
+          $('#nextPlayerButton').hide();
+          generateBoard();
+          $('.numberOfMoves').text(numberOfMoves);
+          $('.stopWatch').text(time);
+        })
 
-
+        //Reset button
+        $('#resetButtonMulti').click(function() {
+          reset();
+          $('#scoreBoardMulti').hide();
+          $('#multiplayer form').show();
+          $('#addNewPlayerButton').show();
+        })
 
         //********** Custom mode **********
 
         //Board Initialise
         $('#startButtonCustom').click(function() {
+          gameMode = 'Custom';
+          gameStatus = "inPlay";
           if (parseInt($('#xaxisInputCustom').val()) >= 2) { xaxis = parseInt($('#xaxisInputCustom').val())};
           if (parseInt($('#yaxisInputCustom').val()) >= 2) { yaxis = parseInt($('#yaxisInputCustom').val())};
           if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
@@ -316,14 +370,14 @@ $(document).ready(function() {
           if (parseInt($('#initialC').val()) >= 1) { counter = parseInt($('#initialC').val()) - 1};
           if ($('#moveInterval').val() > 0) { interval = $('#moveInterval').val()*1000};
           generateBoard();
-          $('#numberOfMoves').text(numberOfMoves);
-          $('#stopWatchCustom').text(time);
+          $('.numberOfMoves').text(numberOfMoves);
+          $('.stopWatch').text(time);
           $('#scoreBoardCustom').show();
           $('#custom form').hide();
         })
 
       //Reset button
-      $('#resetButton').click(function() {
+      $('#resetButtonCustom').click(function() {
         reset();
         $('#scoreBoardCustom').hide();
         $('#custom form').show();
@@ -337,10 +391,10 @@ $(document).ready(function() {
 
         $(document).keydown(function (e) {
           //key register
-          if (e.keyCode == 37) {movement = [1,0,0,0]; speedControl()};
-          if (e.keyCode == 39) {movement = [0,1,0,0]; speedControl()};
-          if (e.keyCode == 38) {movement = [0,0,1,0]; speedControl()};
-          if (e.keyCode == 40) {movement = [0,0,0,1]; speedControl()};
+          if (e.keyCode == 37 && gameStatus === "inPlay") {movement = [1,0,0,0]; speedControl()};
+          if (e.keyCode == 39 && gameStatus === "inPlay") {movement = [0,1,0,0]; speedControl()};
+          if (e.keyCode == 38 && gameStatus === "inPlay") {movement = [0,0,1,0]; speedControl()};
+          if (e.keyCode == 40 && gameStatus === "inPlay") {movement = [0,0,0,1]; speedControl()};
         });
 
 
