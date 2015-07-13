@@ -41,12 +41,29 @@
 
 
           <div role="tabpanel" class="tab-pane" id="multiplayer">
-            <form class="form-horizontal playerNames">
+            <form class="form-horizontal playerList">
               <label>Player names</label>
-              <input type="text" class="form-control" placeholder="Player 1"><br>
-              <input type="text" class="form-control" placeholder="Player 2"><br>
+              <input type="text" class="form-control" placeholder="Player 1">
+              <input type="text" class="form-control" placeholder="Player 2">
             </form>
             <button type="button" id="addNewPlayerButton" class="btn btn-default">Add new player</button>
+            <form class="form-horizontal">
+              <label for="xaxisMulti">X-Axis</label>
+              <input type="text" class="form-control" id="xaxisInputMulti" placeholder="4">
+              <label for="yaxisMulti">Y-Axis</label>
+              <input type="text" class="form-control" id="yaxisInputMulti" placeholder="4">
+              <button type="button" id="startButtonMulti" class="btn btn-default">Start</button>
+            </form>
+            <div id="scoreBoardMulti">
+              <h1 id="whosTurn"></h1>
+              <h1>Time</h1>
+              <span id="stopWatchMulti">0</span>
+              <h1>Grids Covered</h1>
+              <span id="gridsCoveredMulti">0%</span>
+              <h1>Number of moves</h1>
+              <span id="numberOfMovesMulti">0</span>
+              <button type="button" id="resetButton" class="btn btn-default">Reset</button>
+            </div>
 
 
 
@@ -58,25 +75,25 @@
 
           <div role="tabpanel" class="tab-pane" id="custom">
             <form class="form-horizontal">
-              <label for="xaxis">X-Axis</label>
-              <input type="text" class="form-control" id="xaxisInput" placeholder="4"><br>
-              <label for="yaxis">Y-Axis</label>
-              <input type="text" class="form-control" id="yaxisInput" placeholder="4"><br>
+              <label for="xaxisCustom">X-Axis</label>
+              <input type="text" class="form-control" id="xaxisInputCustom" placeholder="4">
+              <label for="yaxisCustom">Y-Axis</label>
+              <input type="text" class="form-control" id="yaxisInputCustom" placeholder="4">
               <label for="wallT">Wall thickness</label>
-              <input type="text" class="form-control" id="wallThicknessInput" placeholder="1"><br>
+              <input type="text" class="form-control" id="wallThicknessInput" placeholder="1">
               <label for="foodV">Food value</label>
-              <input type="text" class="form-control" id="foodValueInput" placeholder="1"><br>
+              <input type="text" class="form-control" id="foodValueInput" placeholder="1">
               <label for="initialC">Starting length</label>
-              <input type="text" class="form-control" id="initialC" placeholder="1"><br>
+              <input type="text" class="form-control" id="initialC" placeholder="1">
               <label for="moveInterval">Interval</label>
-              <input type="text" class="form-control" id="moveInterval" placeholder="0"><br>
-              <button type="button" id="buildButton" class="btn btn-default">Build</button>
+              <input type="text" class="form-control" id="moveInterval" placeholder="0">
+              <button type="button" id="startButtonCustom" class="btn btn-default">Start</button>
             </form>
-            <div id="scoreBoard">
+            <div id="scoreBoardCustom">
               <h1>Time</h1>
-              <span id="stopWatch">0</span>
-              <h1>Grid Covered</h1>
-              <span id="gridCovered">0%</span>
+              <span id="stopWatchCustom">0</span>
+              <h1>Grids Covered</h1>
+              <span id="gridsCoveredCustom">0%</span>
               <h1>Number of moves</h1>
               <span id="numberOfMoves">0</span>
               <button type="button" id="resetButton" class="btn btn-default">Reset</button>

@@ -17,8 +17,9 @@ $(document).ready(function() {
   var time = 0;
   var interval = 0;
   var autoMoving = false;
-  var gridCovered = 1;
-  var numberOfMoves = 0
+  var gridsCovered = 1;
+  var numberOfMoves = 0;
+  var playerNames = [];
 
   //********** Functions **********
 
@@ -133,7 +134,7 @@ $(document).ready(function() {
           if([37, 38, 39, 40].indexOf(e.keyCode) > -1 && recordingTime === false) {
             var timer = setInterval(function(){
               time += 1;
-              $('#stopWatch').text(time/100);
+              $('#stopWatchCustom').text(time/100);
               recordingTime = true;
                if(gameStatus !== "inPlay") {
                  clearInterval(timer);
@@ -204,13 +205,13 @@ $(document).ready(function() {
         //Translate into colors + Calculate grid covered
 
         var colorTranslate = function () {
-          gridCovered = 0;
+          gridsCovered = 0;
           for (i=0; i < xaxis+2*wallthickness; i+=1) {
               for (j=0; j < yaxis+2*wallthickness; j+=1) {
                   if (board[j][i] === 8) {
                     $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'black'})
                   }else if (board[j][i] > 0 ){
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'}); gridCovered++
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'}); gridsCovered++
                   }else if (board[j][i] < 0 ){
                     $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'red'})
                   }else if (board[j][i] === 0 ){
@@ -220,7 +221,7 @@ $(document).ready(function() {
                   }
               }
           }
-          $('#gridCovered').text((gridCovered*100)/(xaxis*yaxis) + "% (" + gridCovered + " out of " + (xaxis*yaxis) + ")")
+          $('#gridsCoveredCustom').text((gridsCovered*100)/(xaxis*yaxis) + "% (" + gridsCovered + " out of " + (xaxis*yaxis) + ")")
       }
 
       //Reset
@@ -241,7 +242,7 @@ $(document).ready(function() {
         time = 0;
         interval = 0;
         autoMoving = false;
-        gridCovered = 1;
+        gridsCovered = 1;
         numberOfMoves = 0;
         $('.table tbody').empty()
       }
@@ -289,12 +290,24 @@ $(document).ready(function() {
 
         //Add new player
         $('#addNewPlayerButton').click(function() {
-          $('.playerNames').append('<input type="text" class="form-control" placeholder="Player ' + ($('.playerNames input').length + 1) + '"><br>')
+          $('.playerList').append('<input type="text" class="form-control" placeholder="Player ' + ($('.playerList input').length + 1) + '">')
         })
 
+        //Board Initialise
+        $('#startButtonMulti').click(function() {
+          for (i = 0; i < $('.playerList input').length; i++) {
+            playerNames[i] = "Player" + (i+1);
+            if ($('.playerList input:nth-child('+ (i+2) + ')').val() !== '') {
+              playerNames[i] = $('.playerList input:nth-child('+ (i+2) + ')').val();
+            }
+          }
+          if (parseInt($('#xaxisInputMulti').val()) >= 2) { xaxis = parseInt($('#xaxisInputMulti').val())};
+          if (parseInt($('#yaxisInputMulti').val()) >= 2) { yaxis = parseInt($('#yaxisInputMulti').val())};
+          generateBoard();
 
 
 
+        })
 
 
 
@@ -302,22 +315,25 @@ $(document).ready(function() {
         //********** Custom mode **********
 
         //Board Initialise
-        $('#buildButton').click(function() {
-          // $('tbody').empty();
-          if (parseInt($('#xaxisInput').val()) >= 2) { xaxis = parseInt($('#xaxisInput').val())};
-          if (parseInt($('#yaxisInput').val()) >= 2) { yaxis = parseInt($('#yaxisInput').val())};
+        $('#startButtonCustom').click(function() {
+          if (parseInt($('#xaxisInputCustom').val()) >= 2) { xaxis = parseInt($('#xaxisInputCustom').val())};
+          if (parseInt($('#yaxisInputCustom').val()) >= 2) { yaxis = parseInt($('#yaxisInputCustom').val())};
           if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
           if (parseInt($('#foodValueInput').val()) >=1) { foodvalue = parseInt($('#foodValueInput').val())};
           if (parseInt($('#initialC').val()) >= 1) { counter = parseInt($('#initialC').val()) - 1};
           if ($('#moveInterval').val() > 0) { interval = $('#moveInterval').val()*1000};
           generateBoard();
-          $('#numberOfMoves').text(numberOfMoves)
-          $('#stopWatch').text(time)
+          $('#numberOfMoves').text(numberOfMoves);
+          $('#stopWatchCustom').text(time);
+          $('#scoreBoardCustom').show();
+          $('#custom form').hide();
         })
 
       //Reset button
       $('#resetButton').click(function() {
         reset();
+        $('#scoreBoardCustom').hide();
+        $('#custom form').show();
       })
 
 
