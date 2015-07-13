@@ -242,7 +242,13 @@ $(document).ready(function() {
         autoMoving = false;
         gridsCovered = 1;
         numberOfMoves = 0;
-        $('.table tbody').empty()
+        $('.table tbody').empty();
+        playerNames = [];
+        playerTimes = [0];
+        $('#timeRecords').empty();
+        $('#playerNames').empty();
+        $('#timeRecords').append('<li>Time</li>');
+        $('#playerNames').append('<li>Player</li>');
       }
 
 
@@ -308,6 +314,7 @@ $(document).ready(function() {
         //Board Initialise
         $('#startButtonMulti').click(function() {
           $('#scoreBoardMulti').show();
+          $('#resetButtonMulti').show();
           $('#multiplayer form').hide();
           $('#addNewPlayerButton').hide();
           gameStatus = "inPlay";
