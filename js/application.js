@@ -247,7 +247,40 @@ $(document).ready(function() {
       }
 
 
+      //Creating main board
 
+      var generateBoard = function () {
+        var x = xaxis + 2 * wallthickness;
+        var y = yaxis + 2 * wallthickness;
+        for (i = 1; i <= y; i +=1 ) {
+          $('.table tbody').append('<tr></tr>');
+          for (j = 1; j <= x; j += 1) {
+            $('.table tbody tr:nth-child(' + i + ')').append('<td></td>')
+          }
+        }
+        $('td').each(function(){$(this).css({"height":$(this).width()});})
+        //Engine setup
+        for (i=0; i < yaxis+2*wallthickness; i+=1) {
+          board[i] = [];
+          for (j=0; j < xaxis+2*wallthickness; j+=1) {
+            board[i][j] = 0;
+          }
+        }
+        for (i=0; i < yaxis+2*wallthickness; i+=1) {
+            for (j=0; j < wallthickness; j+=1) {
+                board[i][j] = 8;
+                board[i][xaxis+2*wallthickness-1-j] = 8;
+            }
+        }
+        for (i=0; i < xaxis+2*wallthickness; i+=1) {
+            for (j=0; j < wallthickness; j+=1) {
+                board[j][i] = 8;
+                board[yaxis+2*wallthickness-1-j][i] = 8;
+            }
+        }
+        board[head[0]][head[1]] = 5;
+        colorTranslate();
+      }
 
 
 
@@ -277,39 +310,9 @@ $(document).ready(function() {
           if (parseInt($('#foodValueInput').val()) >=1) { foodvalue = parseInt($('#foodValueInput').val())};
           if (parseInt($('#initialC').val()) >= 1) { counter = parseInt($('#initialC').val()) - 1};
           if ($('#moveInterval').val() > 0) { interval = $('#moveInterval').val()*1000};
-          var x = xaxis + 2 * wallthickness;
-          var y = yaxis + 2 * wallthickness;
-          for (i = 1; i <= y; i +=1 ) {
-            $('.table tbody').append('<tr></tr>');
-            for (j = 1; j <= x; j += 1) {
-              $('.table tbody tr:nth-child(' + i + ')').append('<td></td>')
-            }
-          }
-          $('td').each(function(){$(this).css({"height":$(this).width()});})
-
-          // Generate empty board
-          for (i=0; i < yaxis+2*wallthickness; i+=1) {
-            board[i] = [];
-            for (j=0; j < xaxis+2*wallthickness; j+=1) {
-              board[i][j] = 0;
-            }
-          }
-          for (i=0; i < yaxis+2*wallthickness; i+=1) {
-              for (j=0; j < wallthickness; j+=1) {
-                  board[i][j] = 8;
-                  board[i][xaxis+2*wallthickness-1-j] = 8;
-              }
-          }
-          for (i=0; i < xaxis+2*wallthickness; i+=1) {
-              for (j=0; j < wallthickness; j+=1) {
-                  board[j][i] = 8;
-                  board[yaxis+2*wallthickness-1-j][i] = 8;
-              }
-          }
+          generateBoard();
           $('#numberOfMoves').text(numberOfMoves)
           $('#stopWatch').text(time)
-          board[head[0]][head[1]] = 5;
-          colorTranslate();
         })
 
       //Reset button
@@ -320,7 +323,7 @@ $(document).ready(function() {
 
 
 
-        //********** Running **********
+        //********** Running / Key listening **********
 
 
         $(document).keydown(function (e) {
@@ -335,6 +338,8 @@ $(document).ready(function() {
 
 
 
+
+
 //********** No Scroll plug-in **********//
 window.addEventListener("keydown", function(e) {
     // space and arrow keys
@@ -342,9 +347,5 @@ window.addEventListener("keydown", function(e) {
         e.preventDefault();
     }
 }, false);
-
-
-
-
 
 })
