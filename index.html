@@ -36,7 +36,33 @@
       <div class="sidebarcontent">
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="original">Original</div>
-          <div role="tabpanel" class="tab-pane" id="arcade">Arcade</div>
+
+
+
+
+
+
+          <div role="tabpanel" class="tab-pane" id="arcade">
+            <button type="button" id="startButtonArcade" class="btn btn-default">Start</button>
+            <h1 id="levelsDisplay"></h1>
+            <h2 id="gridSize"></h2>
+            <div id="scoreBoardArcade">
+              <h1>Time</h1>
+              <span class="stopWatch">0</span>
+              <h1>Grids Covered</h1>
+              <span class="gridsCovered">0%</span>
+              <h1>Number of moves</h1>
+              <span class="numberOfMoves">0</span><br>
+              <ul id="levels">
+                <li>Levels</li>
+              </ul>
+              <ul id="levelsTime">
+                <li>Time</li>
+              </ul>
+              <button type="button" id="nextLevelArcade" class="btn btn-default">Next Level</button>
+              <button type="button" id="resetButtonArcade" class="btn btn-default">Reset</button>
+            </div>
+          </div>
 
 
 
@@ -71,11 +97,6 @@
               <button type="button" id="nextPlayerButton" class="btn btn-default">Next Player</button>
               <button type="button" id="resetButtonMulti" class="btn btn-default">Reset</button>
             </div>
-
-
-
-
-
           </div>
 
 

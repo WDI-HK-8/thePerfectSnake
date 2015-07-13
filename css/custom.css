@@ -80,3 +80,19 @@ td {
 #resetButtonMulti {
   display: none;
 }
+#nextLevelArcade {
+  display: none;
+}
+
+#scoreBoardArcade ul {
+  display:inline-block;
+  list-style-type: none;
+}
+
+#resetButtonArcade {
+  display: none;
+}
+
+#scoreBoardArcade {
+  display: none;
+}

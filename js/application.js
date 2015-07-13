@@ -23,6 +23,7 @@ $(document).ready(function() {
   var playerTimes = [0];
   var gameMode;
   var index = 0 //Use only in multiplayer mode (index of who is playing)
+  var level = 1 //Use only in arcade mode
 
   //********** Functions **********
 
@@ -166,6 +167,8 @@ $(document).ready(function() {
                 gameStatus = "crashed";
                 if (gameMode === 'Multiplayer') {
                   multiplayerAddOns();
+                }else if (gameMode === 'Arcade') {
+                  arcadeAddOns();
                 }
                 alert("You Lost :((( Time taken: " + (time/100) + "s");
               }else if (movement[i] === 1 && checkStuff()[i] < 0) {
@@ -189,6 +192,8 @@ $(document).ready(function() {
                 alert("Perfect Snake! Well done!! Time taken: " + (time/100) + "s");
                 if (gameMode === 'Multiplayer') {
                   multiplayerAddOns();
+                }else if (gameMode === 'Arcade') {
+                  arcadeAddOns();
                 }
 
               }
@@ -220,7 +225,7 @@ $(document).ready(function() {
                   }
               }
           }
-          $('.gridsCovered').text((gridsCovered*100)/(xaxis*yaxis) + "% (" + gridsCovered + " out of " + (xaxis*yaxis) + ")")
+          $('.gridsCovered').text(((gridsCovered*100)/(xaxis*yaxis)).toFixed(2) + "% (" + gridsCovered + " out of " + (xaxis*yaxis) + ")")
       }
 
       //Reset
@@ -249,6 +254,12 @@ $(document).ready(function() {
         $('#playerNames').empty();
         $('#timeRecords').append('<li>Time</li>');
         $('#playerNames').append('<li>Player</li>');
+        $('#levels').empty();
+        $('#levelsTime').empty();
+        $('#levels').append('<li>Levels</li>')
+        $('#levelsTime').append('<li>Time</li>')
+        index = 0;
+        level = 1;
       }
 
 
@@ -287,6 +298,19 @@ $(document).ready(function() {
         colorTranslate();
       }
 
+      //Arcade add-ons
+      var arcadeAddOns = function() {
+        if (gameStatus === "crashed") {
+          $('#levelsTime').append('<li>crashed</li>');
+          $('#levels').append('<li>Level ' + level + '</li>');
+        }else if (gameStatus === "Won") {
+          $('#levelsTime').append('<li>' + (time/100) + '</li>');
+          $('#levels').append('<li>Level ' + level + '</li>');
+          $('#nextLevelArcade').show();
+        }
+      }
+
+
       //Multiplayer add-ons
       var multiplayerAddOns = function() {
         if (gameStatus === "crashed") {
@@ -298,14 +322,54 @@ $(document).ready(function() {
         }
         if ((index + 1) < $('.playerList input').length) {
           $('#nextPlayerButton').show()
-        }else {
-
         }
       }
+      //********** Arcade mode **********
+        //Board Initialise
+        $('#startButtonArcade').click(function() {
+          $('#scoreBoardArcade').show();
+          gameMode = 'Arcade';
+          gameStatus = "inPlay";
+          xaxis = 1 + level;
+          yaxis = 1 + level;
+          generateBoard();
+          $('.numberOfMoves').text(numberOfMoves);
+          $('.stopWatch').text(time);
+          $('#startButtonArcade').hide();
+          $('#resetButtonArcade').show();
 
+        })
+        //Next level button
+        $('#nextLevelArcade').click(function() {
+          gameStatus = 'inPlay';
+          board = [];
+          $('.table tbody').empty();
+          counter = 0;
+          needGen = 1;
+          head = [2,2];
+          tail = [null,null];
+          movement = [0,0,0,0]; //[left,right,up,down]
+          recordingTime = false;
+          time = 0;
+          gridsCovered = 1;
+          numberOfMoves = 0;
+          level++;
+          xaxis = 1 + level;
+          yaxis = 1 + level;
+          generateBoard();
+          $('.numberOfMoves').text(numberOfMoves);
+          $('.stopWatch').text(time);
+          $('#nextLevelArcade').hide();
+        })
+        //Reset button
+        $('#resetButtonArcade').click(function() {
+          reset();
+          $('#startButtonArcade').show();
+          $('#resetButtonArcade').hide();
+          $('#scoreBoardArcade').hide();
+        })
 
       //********** Multiplayer mode **********
-
         //Add new player
         $('#addNewPlayerButton').click(function() {
           $('.playerList').append('<input type="text" class="form-control" placeholder="Player ' + ($('.playerList input').length + 1) + '">')
