@@ -1,0 +1,24 @@
+{
+  "name": "thePerfectSnake",
+  "version": "0.0.1",
+  "homepage": "https://github.com/WDI-HK-8/thePerfectSnake",
+  "authors": [
+    "Richard Li <xpp@me.com>"
+  ],
+  "main": "index.html",
+  "keywords": [
+    "Perfect"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}

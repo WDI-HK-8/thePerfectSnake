@@ -20,6 +20,8 @@ $(document).ready(function() {
   var gridsCovered = 1;
   var numberOfMoves = 0;
   var playerNames = [];
+  var playerTimes = [0];
+  var whoIsPlaying = 1;
 
   //********** Functions **********
 
@@ -59,9 +61,6 @@ $(document).ready(function() {
         };
 
 
-
-
-
         //Chop tail
         var chopTail = function() {
           for (i = 0; i < xaxis+2*wallthickness; i+=1) {
@@ -86,11 +85,6 @@ $(document).ready(function() {
             board[tail[0]][tail[1]] = 0;
           }
         };
-
-
-
-
-
 
 
         //Check if food is nearby [left,right,up,down]
@@ -144,7 +138,6 @@ $(document).ready(function() {
         })
 
         //Speed control system
-
         var speedControl = function() {
             if (interval === 0 && oppositeCheck((movement.indexOf(1) + 1) , board[head[0]][head[1]]) === false) {
                 running();
@@ -166,11 +159,11 @@ $(document).ready(function() {
         }
 
         //Running
-
         var running = function() {
             for (i = 0; i < 4; i+=1) {
               if (movement[i] === 1 && checkStuff()[i] > 0) {
                 gameStatus = "crashed";
+                playerTimes[playerTimes.indexOf(0)] = 'Lost';
                 alert("You Lost :((( Time taken: " + (time/100) + "s");
               }else if (movement[i] === 1 && checkStuff()[i] < 0) {
                 counter = counter - checkStuff()[i];
@@ -191,6 +184,7 @@ $(document).ready(function() {
               if (checkWin() === true) {
                 gameStatus = "Won";
                 alert("Perfect Snake! Well done!! Time taken: " + (time/100) + "s");
+                playerTimes[playerTimes.indexOf(0)] = (time/100)
               }
               if (needGen === 1 && gameStatus == "inPlay" ) {
                   foodGen();
@@ -203,7 +197,6 @@ $(document).ready(function() {
         }
 
         //Translate into colors + Calculate grid covered
-
         var colorTranslate = function () {
           gridsCovered = 0;
           for (i=0; i < xaxis+2*wallthickness; i+=1) {
@@ -225,7 +218,6 @@ $(document).ready(function() {
       }
 
       //Reset
-
       var reset = function () {
         board = [];
         xaxis = 4;
@@ -297,15 +289,16 @@ $(document).ready(function() {
         $('#startButtonMulti').click(function() {
           for (i = 0; i < $('.playerList input').length; i++) {
             playerNames[i] = "Player" + (i+1);
+            playerTimes[i] = 0;
             if ($('.playerList input:nth-child('+ (i+2) + ')').val() !== '') {
               playerNames[i] = $('.playerList input:nth-child('+ (i+2) + ')').val();
             }
+            $('#playerNames').append('<li>' + playerNames[i] + '</li>');
+            $('#timeRecords').append('<li>' + playerTimes[i] + '</li>')
           }
           if (parseInt($('#xaxisInputMulti').val()) >= 2) { xaxis = parseInt($('#xaxisInputMulti').val())};
           if (parseInt($('#yaxisInputMulti').val()) >= 2) { yaxis = parseInt($('#yaxisInputMulti').val())};
           generateBoard();
-
-
 
         })
 
