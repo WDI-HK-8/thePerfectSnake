@@ -73,11 +73,11 @@ td {
   list-style-type: none;
 }
 
-#scoreBoardMulti {
+#scoreBoardMulti{
   display: none;
 }
 
-#resetButtonMulti {
+#resetButtonMulti{
   display: none;
 }
 #nextLevelArcade {
@@ -94,5 +94,9 @@ td {
 }
 
 #scoreBoardArcade {
+  display: none;
+}
+
+#scoreBoardOriginal {
   display: none;
 }

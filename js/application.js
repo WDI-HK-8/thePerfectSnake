@@ -256,8 +256,10 @@ $(document).ready(function() {
         $('#playerNames').append('<li>Player</li>');
         $('#levels').empty();
         $('#levelsTime').empty();
-        $('#levels').append('<li>Levels</li>')
-        $('#levelsTime').append('<li>Time</li>')
+        $('#levels').append('<li>Levels</li>');
+        $('#levelsTime').append('<li>Time</li>');
+        $('#levelDisplay').text('Level 1');
+        $('#gridSize').text('2 x 2 grid');
         index = 0;
         level = 1;
       }
@@ -324,6 +326,38 @@ $(document).ready(function() {
           $('#nextPlayerButton').show()
         }
       }
+      //********** Original mode **********
+      //Board Initialise
+      $('#startButtonOriginal').click(function() {
+        $('#startButtonOriginal').hide();
+        $('#buttonGroupOriginal').hide();
+        $('#scoreBoardOriginal').show();
+        gameMode = 'Original';
+        gameStatus = "inPlay";
+        if (interval === 0) {
+          interval = 150;
+        }
+        xaxis = 25;
+        yaxis = 20;
+        generateBoard();
+        $('.numberOfMoves').text(numberOfMoves);
+        $('.stopWatch').text(time);
+      })
+      //Speed choosing
+      $('#verySlow').click(function() {interval = 400})
+      $('#slow').click(function() {interval = 250})
+      $('#normal').click(function() {interval = 150})
+      $('#fast').click(function() {interval = 100})
+      $('#veryFast').click(function() {interval = 50})
+      //Reset button
+      $('#resetButtonOriginal').click(function() {
+        reset();
+        $('#startButtonOriginal').show();
+        $('#buttonGroupOriginal').show();
+        $('#scoreBoardOriginal').hide();
+
+      })
+
       //********** Arcade mode **********
         //Board Initialise
         $('#startButtonArcade').click(function() {
@@ -357,6 +391,8 @@ $(document).ready(function() {
           xaxis = 1 + level;
           yaxis = 1 + level;
           generateBoard();
+          $('#levelDisplay').text('Level ' + level);
+          $('#gridSize').text(xaxis + ' x ' + yaxis + ' grid');
           $('.numberOfMoves').text(numberOfMoves);
           $('.stopWatch').text(time);
           $('#nextLevelArcade').hide();

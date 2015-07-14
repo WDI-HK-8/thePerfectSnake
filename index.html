@@ -35,7 +35,25 @@
     <div class="sidebar">
       <div class="sidebarcontent">
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="original">Original</div>
+          <div role="tabpanel" class="tab-pane active" id="original">
+            <button type="button" id="startButtonOriginal" class="btn btn-default">Start</button>
+            <div class="btn-group btn-group-sm" id="buttonGroupOriginal" role="group">
+              <button type="button" id="verySlow" class="btn btn-default">Very slow</button>
+              <button type="button" id="slow" class="btn btn-default">Slow</button>
+              <button type="button" id="normal" class="btn btn-default">Normal</button>
+              <button type="button" id="fast" class="btn btn-default">Fast</button>
+              <button type="button" id="veryFast" class="btn btn-default">Very fast</button>
+            </div>
+            <div id="scoreBoardOriginal">
+              <h1>Time</h1>
+              <span class="stopWatch">0</span>
+              <h1>Grids Covered</h1>
+              <span class="gridsCovered">0%</span>
+              <h1>Number of moves</h1>
+              <span class="numberOfMoves">0</span><br>
+              <button type="button" id="resetButtonOriginal" class="btn btn-default">Reset</button>
+            </div>
+          </div>
 
 
 
@@ -44,9 +62,9 @@
 
           <div role="tabpanel" class="tab-pane" id="arcade">
             <button type="button" id="startButtonArcade" class="btn btn-default">Start</button>
-            <h1 id="levelsDisplay"></h1>
-            <h2 id="gridSize"></h2>
             <div id="scoreBoardArcade">
+              <h1 id="levelDisplay">Level 1</h1>
+              <h2 id="gridSize">2 x 2 grid</h2>
               <h1>Time</h1>
               <span class="stopWatch">0</span>
               <h1>Grids Covered</h1>
@@ -137,7 +155,7 @@
 
 
       <div id="main">
-        <container class="col-lg-8  col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+        <container class="col-lg-10  col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
           <div class="table-responsive">
             <table class="table">
               <tbody>
