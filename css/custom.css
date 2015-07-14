@@ -1,11 +1,48 @@
 body {
-    background-color: #6E86E6;
+    background-color: black;
+    background-image: url("../images/snake_background_2.jpg");
+    background-size: 1024px 768px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-repeat: no-repeat;;
 }
 
+p {
+  font-family: 'babyui';
+  color: black
+
+}
+
+.nav-tabs li {
+  font-family: Rixon;
+}
+.nav>li>a  {
+  color: white;
+  padding: 14px 5px 0px 5px;
+  font-size: 16px;
+  border-radius: 0px
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  color: black;
+  border: 3px solid white;
+  border-bottom-color: red
+}
+.navbar-header {
+  margin-top: 15px;
+  margin-bottom: -5px;
+  margin-left: 20px;
+}
 .navbar-header h1 {
-  margin: 0px;
-  padding: 0px;
-  color: red
+  color: red;
+  display: inline;
+  font-family: 'BLACKCAPS-Regular'
+}
+.navbar-default {
+  border-bottom: 3px solid white
+}
+
+.navbar-header h1:first-child {
+  color: white
 }
 
 .form-inline {
@@ -13,22 +50,23 @@ body {
 }
 
 .navbar {
-  background-color: #65247F;
+  background-color: black;
 }
 
 td {
-  border: 2px solid black;
+  border: 3px solid black;
 }
 
 #main {
-  margin-left: 345px;
+  margin-left: 340px;
 }
 .navbar {
   min-height:50px;
 }
 .sidebar {
-  width: 345px;
-  border-right: 1px solid white
+  width: 340px;
+  border-right: 3px solid white;
+  border-left: 3px solid white
 }
 
 
@@ -42,13 +80,13 @@ td {
 
 
 .sidebar {
-  background-color: #8C6DD7;
+  background-color: red;
 }
 
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-  background-color:#8C6DD7;
-  box-shadow: 0 1px 0 #8C6DD7;
+  background-color:red;
+  box-shadow: 0 3px 0 red;
 }
 
 
@@ -99,4 +137,31 @@ td {
 
 #scoreBoardOriginal {
   display: none;
+}
+
+
+/********** Fonts ***********/
+@font-face {
+font-family: "Gtek";
+src: url('../fonts/Gtek.ttf') format('truetype');
+}
+
+@font-face {
+font-family: "BLACKCAPS-Regular";
+src: url('../fonts/BLACKCAPS-Regular.ttf') format('truetype');
+}
+
+@font-face {
+font-family: "Argentina";
+src: url('../fonts/Argentina.ttf') format('truetype');
+}
+
+@font-face {
+font-family: "Rixon";
+src: url('../fonts/Rixon.ttf') format('truetype');
+}
+
+@font-face {
+font-family: "babyui";
+src: url('../fonts/babyui2.ttf') format('truetype');
 }
