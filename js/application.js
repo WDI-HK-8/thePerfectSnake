@@ -355,7 +355,6 @@ $(document).ready(function() {
         $('#startButtonOriginal').show();
         $('#buttonGroupOriginal').show();
         $('#scoreBoardOriginal').hide();
-
       })
 
       //********** Arcade mode **********
@@ -491,10 +490,7 @@ $(document).ready(function() {
       })
 
 
-
-
         //********** Running / Key listening **********
-
 
         $(document).keydown(function (e) {
           //key register
@@ -503,12 +499,6 @@ $(document).ready(function() {
           if (e.keyCode == 38 && gameStatus === "inPlay") {movement = [0,0,1,0]; speedControl()};
           if (e.keyCode == 40 && gameStatus === "inPlay") {movement = [0,0,0,1]; speedControl()};
         });
-
-
-
-
-
-
 
 //********** No Scroll plug-in **********//
 window.addEventListener("keydown", function(e) {
