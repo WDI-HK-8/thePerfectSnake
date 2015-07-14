@@ -331,6 +331,7 @@ $(document).ready(function() {
       $('#startButtonOriginal').click(function() {
         $('#startButtonOriginal').hide();
         $('#buttonGroupOriginal').hide();
+        $('.intro').hide();
         $('#scoreBoardOriginal').show();
         gameMode = 'Original';
         gameStatus = "inPlay";
@@ -344,16 +345,17 @@ $(document).ready(function() {
         $('.stopWatch').text(time);
       })
       //Speed choosing
-      $('#verySlow').click(function() {interval = 400})
-      $('#slow').click(function() {interval = 250})
-      $('#normal').click(function() {interval = 150})
-      $('#fast').click(function() {interval = 100})
-      $('#veryFast').click(function() {interval = 50})
+      $('#verySlow').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 400})
+      $('#slow').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 250})
+      $('#normal').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 150})
+      $('#fast').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 100})
+      $('#veryFast').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 50})
       //Reset button
       $('#resetButtonOriginal').click(function() {
         reset();
         $('#startButtonOriginal').show();
         $('#buttonGroupOriginal').show();
+        $('.intro').show();
         $('#scoreBoardOriginal').hide();
       })
 
@@ -361,15 +363,18 @@ $(document).ready(function() {
         //Board Initialise
         $('#startButtonArcade').click(function() {
           $('#scoreBoardArcade').show();
+          $('.intro').hide();
           gameMode = 'Arcade';
           gameStatus = "inPlay";
           xaxis = 1 + level;
           yaxis = 1 + level;
+          interval = 0;
           generateBoard();
           $('.numberOfMoves').text(numberOfMoves);
           $('.stopWatch').text(time);
           $('#startButtonArcade').hide();
           $('#resetButtonArcade').show();
+          $('#nextLevelArcade').hide();
 
         })
         //Next level button
@@ -402,6 +407,7 @@ $(document).ready(function() {
           $('#startButtonArcade').show();
           $('#resetButtonArcade').hide();
           $('#scoreBoardArcade').hide();
+          $('.intro').show();
         })
 
       //********** Multiplayer mode **********
@@ -416,6 +422,8 @@ $(document).ready(function() {
           $('#resetButtonMulti').show();
           $('#multiplayer form').hide();
           $('#addNewPlayerButton').hide();
+          $('.intro').hide();
+          interval = 0;
           gameStatus = "inPlay";
           gameMode = 'Multiplayer';
           for (i = 0; i < $('.playerList input').length; i++) {
@@ -461,6 +469,7 @@ $(document).ready(function() {
           $('#scoreBoardMulti').hide();
           $('#multiplayer form').show();
           $('#addNewPlayerButton').show();
+          $('.intro').show();
         })
 
         //********** Custom mode **********
@@ -480,6 +489,7 @@ $(document).ready(function() {
           $('.stopWatch').text(time);
           $('#scoreBoardCustom').show();
           $('#custom form').hide();
+          $('.intro').hide();
         })
 
       //Reset button
@@ -487,6 +497,7 @@ $(document).ready(function() {
         reset();
         $('#scoreBoardCustom').hide();
         $('#custom form').show();
+        $('.intro').show();
       })
 
 

@@ -36,24 +36,27 @@
       <div class="sidebarcontent">
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="original">
-            <p id="introOrginal">Dates back to the 70's, the snake game was one of the greatest hits of all in the histroy of video gaming. Choose your speed, sit back and enjoy. No further instructions, none is required. </p>
-            <button type="button" id="startButtonOriginal" class="btn btn-default">Start</button>
-            <div class="btn-group btn-group-sm" id="buttonGroupOriginal" role="group">
-              <button type="button" id="verySlow" class="btn btn-default">Very slow</button>
-              <button type="button" id="slow" class="btn btn-default">Slow</button>
-              <button type="button" id="normal" class="btn btn-default">Normal</button>
-              <button type="button" id="fast" class="btn btn-default">Fast</button>
-              <button type="button" id="veryFast" class="btn btn-default">Very fast</button>
-            </div>
+            <img class="lineBreaks" src="images/transparent-scroll-line.png">
+            <p class="intro">The legendary snake. This game dates back to the early 70's, and still remains as one of the greatest in the history of video gaming. Choose your speed, sit back and enjoy. No further instructions, none is required. </p>
             <div id="scoreBoardOriginal">
               <h1>Time</h1>
               <span class="stopWatch">0</span>
               <h1>Grids Covered</h1>
               <span class="gridsCovered">0%</span>
-              <h1>Number of moves</h1>
+              <h1>Moves</h1>
               <span class="numberOfMoves">0</span><br>
               <button type="button" id="resetButtonOriginal" class="btn btn-default">Reset</button>
             </div>
+            <img class="lineBreaks" src="images/fancy1.png">
+            <p class="intro">Choose your speed</p>
+            <div class="btn-group btn-group-sm " id="buttonGroupOriginal" role="group">
+              <button type="button" id="verySlow" class="btn btn-default">Very slow</button>
+              <button type="button" id="slow" class="btn btn-default">Slow</button>
+              <button type="button" id="normal" class="btn btn-default active">Normal</button>
+              <button type="button" id="fast" class="btn btn-default">Fast</button>
+              <button type="button" id="veryFast" class="btn btn-default">Very fast</button>
+            </div>
+            <button type="button" id="startButtonOriginal" class="btn btn-default">Start</button>
           </div>
 
 
@@ -62,7 +65,8 @@
 
 
           <div role="tabpanel" class="tab-pane" id="arcade">
-            <button type="button" id="startButtonArcade" class="btn btn-default">Start</button>
+            <img class="lineBreaks" src="images/transparent-scroll-line.png">
+            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
             <div id="scoreBoardArcade">
               <h1 id="levelDisplay">Level 1</h1>
               <h2 id="gridSize">2 x 2 grid</h2>
@@ -70,7 +74,7 @@
               <span class="stopWatch">0</span>
               <h1>Grids Covered</h1>
               <span class="gridsCovered">0%</span>
-              <h1>Number of moves</h1>
+              <h1>Moves</h1>
               <span class="numberOfMoves">0</span><br>
               <ul id="levels">
                 <li>Levels</li>
@@ -81,11 +85,33 @@
               <button type="button" id="nextLevelArcade" class="btn btn-default">Next Level</button>
               <button type="button" id="resetButtonArcade" class="btn btn-default">Reset</button>
             </div>
+            <img class="lineBreaks" src="images/fancy1.png">
+            <button type="button" id="startButtonArcade" class="btn btn-default">Start</button>
           </div>
 
 
 
           <div role="tabpanel" class="tab-pane" id="multiplayer">
+            <img class="lineBreaks" src="images/transparent-scroll-line.png">
+            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
+            <div id="scoreBoardMulti">
+              <h1 id="whosTurn"></h1>
+              <h1>Time</h1>
+              <span class="stopWatch">0</span>
+              <h1>Grids Covered</h1>
+              <span class="gridsCovered">0%</span>
+              <h1>Moves</h1>
+              <span class="numberOfMoves">0</span><br>
+              <ul id="playerNames">
+                <li>Player</li>
+              </ul>
+              <ul id="timeRecords">
+                <li>Time</li>
+              </ul>
+              <button type="button" id="nextPlayerButton" class="btn btn-default">Next Player</button>
+              <button type="button" id="resetButtonMulti" class="btn btn-default">Reset</button>
+            </div>
+            <img class="lineBreaks" src="images/fancy1.png">
             <form class="form-horizontal playerList">
               <label>Player names</label>
               <input type="text" class="form-control" placeholder="Player 1">
@@ -99,28 +125,23 @@
               <input type="text" class="form-control" id="yaxisInputMulti" placeholder="4">
               <button type="button" id="startButtonMulti" class="btn btn-default">Start</button>
             </form>
-            <div id="scoreBoardMulti">
-              <h1 id="whosTurn"></h1>
-              <h1>Time</h1>
-              <span class="stopWatch">0</span>
-              <h1>Grids Covered</h1>
-              <span class="gridsCovered">0%</span>
-              <h1>Number of moves</h1>
-              <span class="numberOfMoves">0</span><br>
-              <ul id="playerNames">
-                <li>Player</li>
-              </ul>
-              <ul id="timeRecords">
-                <li>Time</li>
-              </ul>
-              <button type="button" id="nextPlayerButton" class="btn btn-default">Next Player</button>
-              <button type="button" id="resetButtonMulti" class="btn btn-default">Reset</button>
-            </div>
           </div>
 
 
 
           <div role="tabpanel" class="tab-pane" id="custom">
+            <img class="lineBreaks" src="images/transparent-scroll-line.png">
+            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
+            <div id="scoreBoardCustom">
+              <h1>Time</h1>
+              <span class="stopWatch">0</span>
+              <h1>Grids Covered</h1>
+              <span class="gridsCovered">0%</span>
+              <h1>Moves</h1>
+              <span class="numberOfMoves">0</span><br>
+              <button type="button" id="resetButtonCustom" class="btn btn-default">Reset</button>
+            </div>
+            <img class="lineBreaks" src="images/fancy1.png">
             <form class="form-horizontal">
               <label for="xaxisCustom">X-Axis</label>
               <input type="text" class="form-control" id="xaxisInputCustom" placeholder="4">
@@ -136,15 +157,6 @@
               <input type="text" class="form-control" id="moveInterval" placeholder="0">
               <button type="button" id="startButtonCustom" class="btn btn-default">Start</button>
             </form>
-            <div id="scoreBoardCustom">
-              <h1>Time</h1>
-              <span class="stopWatch">0</span>
-              <h1>Grids Covered</h1>
-              <span class="gridsCovered">0%</span>
-              <h1>Number of moves</h1>
-              <span class="numberOfMoves">0</span><br>
-              <button type="button" id="resetButtonCustom" class="btn btn-default">Reset</button>
-            </div>
           </div>
 
 
