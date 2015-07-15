@@ -20,6 +20,13 @@ p {
   margin-left: -20px
 }
 
+label {
+  font-family: 'babyui';
+  color: black;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px
+}
 .nav-tabs li {
   font-family: Rixon;
 }
@@ -115,8 +122,8 @@ td {
   color: white;
   background-color: black;
   border: none;
-  border-radius: none;
-  font-family: 'Quango'
+  font-family: 'Quango';
+
 }
 
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
@@ -169,8 +176,15 @@ td {
   font-size: 30px;
   color: white;
   text-align: center;
-
 }
+
+/*.form-control {
+  width: 100px;
+  border-radius: 0px
+}
+.playerList .form-control {
+  width: 100%
+}*/
 /********** Fonts ***********/
 @font-face {
   font-family: "Gtek";
