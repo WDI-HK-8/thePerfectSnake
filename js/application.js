@@ -22,8 +22,14 @@ $(document).ready(function() {
   var playerNames = [];
   var playerTimes = [0];
   var gameMode;
-  var index = 0 //Use only in multiplayer mode (index of who is playing)
-  var level = 1 //Use only in arcade mode
+  var index = 0; //Use only in multiplayer mode (index of who is playing)
+  var level = 1; //Use only in arcade mode
+  var wallColor = 'black';
+  var headColor = 'green';
+  var snakeColor = 'blue';
+  var backgroundColor = 'white';
+  var foodColor = 'red';
+  var reverse = false;
 
   //********** Functions **********
 
@@ -213,15 +219,15 @@ $(document).ready(function() {
           for (i=0; i < xaxis+2*wallthickness; i+=1) {
               for (j=0; j < yaxis+2*wallthickness; j+=1) {
                   if (board[j][i] === 8) {
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'black'})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":wallColor})
                   }else if (board[j][i] > 0 ){
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'blue'}); gridsCovered++
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":snakeColor}); gridsCovered++
                   }else if (board[j][i] < 0 ){
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'red'})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":foodColor})
                   }else if (board[j][i] === 0 ){
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'white'})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":backgroundColor})
                   }if (j === head[0] && i === head[1]) {
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'green'});
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":headColor});
                   }
               }
           }
@@ -244,6 +250,7 @@ $(document).ready(function() {
         recordingTime = false;
         time = 0;
         interval = 0;
+        $('#buttonGroupOriginal button').removeClass('active'); $('#normal').addClass('active');
         autoMoving = false;
         gridsCovered = 1;
         numberOfMoves = 0;
@@ -262,6 +269,13 @@ $(document).ready(function() {
         $('#gridSize').text('2 x 2 grid');
         index = 0;
         level = 1;
+        wallColor = 'black';
+        headColor = 'green';
+        snakeColor = 'blue';
+        backgroundColor = 'white';
+        foodColor = 'red';
+        reverse = false;
+        $('#buttonGroupCustom button').removeClass('active'); $('#reverseFalse').addClass('active')
       }
 
 
@@ -344,12 +358,14 @@ $(document).ready(function() {
         $('.numberOfMoves').text(numberOfMoves);
         $('.stopWatch').text(time);
       })
-      //Speed choosing
+      //Speed choosing && determining reverse or not
       $('#verySlow').click(function() { $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 400})
       $('#slow').click(function() {     $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 250})
       $('#normal').click(function() {   $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 150})
       $('#fast').click(function() {     $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 100})
       $('#veryFast').click(function() { $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 50})
+      $('#reverseTrue').click(function() { $('#buttonGroupCustom button').removeClass('active'); $(this).addClass('active'); reverse = true})
+      $('#reverseFalse').click(function() {$('#buttonGroupCustom button').removeClass('active'); $(this).addClass('active'); reverse = false})
       //Reset button
       $('#resetButtonOriginal').click(function() {
         reset();
@@ -490,6 +506,11 @@ $(document).ready(function() {
           if (parseInt($('#xaxisInputCustom').val()) >= 2) {xaxis =   parseInt($('#xaxisInputCustom').val())};
           if (parseInt($('#yaxisInputCustom').val()) >= 2) {yaxis =   parseInt($('#yaxisInputCustom').val())};
           if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
+          if ($('#wallColorInput').val() !== '') {wallColor =   $('#wallColorInput').val()};
+          if ($('#headColorInput').val() !== '') {headColor =   $('#headColorInput').val()};
+          if ($('#snakeColorInput').val() !== '') {snakeColor =   $('#snakeColorInput').val()};
+          if ($('#backgroundColorInput').val() !== '') {backgroundColor =   $('#backgroundColorInput').val()};
+          if ($('#foodColorInput').val() !== '') {foodColor =   $('#foodColorInput').val()};
           head[1] = 1 + wallthickness;
           head[0] = 1 + wallthickness;
           var headXaxis = parseInt($('#headXaxis').val());
@@ -527,11 +548,17 @@ $(document).ready(function() {
         //********** Running / Key listening **********
 
         $(document).keydown(function (e) {
-          //key register
-          if (e.keyCode == 37 && gameStatus === "inPlay") {movement = [1,0,0,0]; speedControl()};
-          if (e.keyCode == 39 && gameStatus === "inPlay") {movement = [0,1,0,0]; speedControl()};
-          if (e.keyCode == 38 && gameStatus === "inPlay") {movement = [0,0,1,0]; speedControl()};
-          if (e.keyCode == 40 && gameStatus === "inPlay") {movement = [0,0,0,1]; speedControl()};
+          if (reverse == false) {
+            if (e.keyCode == 37 && gameStatus === "inPlay") {movement = [1,0,0,0]; speedControl()};
+            if (e.keyCode == 39 && gameStatus === "inPlay") {movement = [0,1,0,0]; speedControl()};
+            if (e.keyCode == 38 && gameStatus === "inPlay") {movement = [0,0,1,0]; speedControl()};
+            if (e.keyCode == 40 && gameStatus === "inPlay") {movement = [0,0,0,1]; speedControl()};
+          }else if (reverse == true) {
+            if (e.keyCode == 37 && gameStatus === "inPlay") {movement = [0,1,0,0]; speedControl()};
+            if (e.keyCode == 39 && gameStatus === "inPlay") {movement = [1,0,0,0]; speedControl()};
+            if (e.keyCode == 38 && gameStatus === "inPlay") {movement = [0,0,0,1]; speedControl()};
+            if (e.keyCode == 40 && gameStatus === "inPlay") {movement = [0,0,1,0]; speedControl()};
+          }
         });
 
         //********** Reset when switch tabs **********
