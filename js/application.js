@@ -345,11 +345,11 @@ $(document).ready(function() {
         $('.stopWatch').text(time);
       })
       //Speed choosing
-      $('#verySlow').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 400})
-      $('#slow').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 250})
-      $('#normal').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 150})
-      $('#fast').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 100})
-      $('#veryFast').click(function() {$('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 50})
+      $('#verySlow').click(function() { $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 400})
+      $('#slow').click(function() {     $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 250})
+      $('#normal').click(function() {   $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 150})
+      $('#fast').click(function() {     $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 100})
+      $('#veryFast').click(function() { $('#buttonGroupOriginal button').removeClass('active'); $(this).addClass('active'); interval = 50})
       //Reset button
       $('#resetButtonOriginal').click(function() {
         reset();
@@ -416,6 +416,14 @@ $(document).ready(function() {
           $('.playerList').append('<input type="text" class="form-control" placeholder="Player ' + ($('.playerList input').length + 1) + '">')
         })
 
+        //Preview board
+        $('#xaxisInputMulti, #yaxisInputMulti').keyup(function() {
+          reset();
+          if (parseInt($('#xaxisInputMulti').val()) >= 2) { xaxis = parseInt($('#xaxisInputMulti').val())};
+          if (parseInt($('#yaxisInputMulti').val()) >= 2) { yaxis = parseInt($('#yaxisInputMulti').val())};
+          generateBoard();
+        })
+
         //Board Initialise
         $('#startButtonMulti').click(function() {
           $('#scoreBoardMulti').show();
@@ -435,16 +443,14 @@ $(document).ready(function() {
             $('#playerNames').append('<li>' + playerNames[i] + '</li>');
             $('#timeRecords').append('<li>' + playerTimes[i] + '</li>')
           }
-          if (parseInt($('#xaxisInputMulti').val()) >= 2) { xaxis = parseInt($('#xaxisInputMulti').val())};
-          if (parseInt($('#yaxisInputMulti').val()) >= 2) { yaxis = parseInt($('#yaxisInputMulti').val())};
-          generateBoard();
-          $('#whosTurn').text(playerNames[0] + 's turn')
+
+          $('#whosTurn').text(playerNames[0] + ' \'s turn')
         })
 
         //Next player button
         $('#nextPlayerButton').click(function() {
           index++;
-          $('#whosTurn').text(playerNames[index] + 's turn');
+          $('#whosTurn').text(playerNames[index] + ' \'s turn');
           gameStatus = 'inPlay';
           board = [];
           $('.table tbody').empty();
@@ -466,25 +472,34 @@ $(document).ready(function() {
         //Reset button
         $('#resetButtonMulti').click(function() {
           reset();
+          generateBoard();
           $('#scoreBoardMulti').hide();
           $('#multiplayer form').show();
           $('#addNewPlayerButton').show();
           $('.intro').show();
+          $('input').val('');
+          $('.playerList').empty();
+          $('.playerList').append('<label class="intro">Player names</label><input type="text" class="form-control" placeholder="Player 1"><input type="text" class="form-control" placeholder="Player 2">')
         })
 
         //********** Custom mode **********
+
+        //Preview board
+        $('#xaxisInputCustom, #yaxisInputCustom, #wallThicknessInput').keyup(function() {
+          reset();
+          if (parseInt($('#xaxisInputCustom').val()) >= 2) {   xaxis = parseInt($('#xaxisInputCustom').val())};
+          if (parseInt($('#yaxisInputCustom').val()) >= 2) {   yaxis = parseInt($('#yaxisInputCustom').val())};
+          if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
+          generateBoard();
+        })
 
         //Board Initialise
         $('#startButtonCustom').click(function() {
           gameMode = 'Custom';
           gameStatus = "inPlay";
-          if (parseInt($('#xaxisInputCustom').val()) >= 2) { xaxis = parseInt($('#xaxisInputCustom').val())};
-          if (parseInt($('#yaxisInputCustom').val()) >= 2) { yaxis = parseInt($('#yaxisInputCustom').val())};
-          if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
           if (parseInt($('#foodValueInput').val()) >=1) { foodvalue = parseInt($('#foodValueInput').val())};
-          if (parseInt($('#initialC').val()) >= 1) { counter = parseInt($('#initialC').val()) - 1};
-          if ($('#moveInterval').val() > 0) { interval = $('#moveInterval').val()*1000};
-          generateBoard();
+          if (parseInt($('#initialC').val()) >= 1) {      counter = parseInt($('#initialC').val()) - 1};
+          if ($('#moveInterval').val() > 0) {             interval = $('#moveInterval').val()*1000};
           $('.numberOfMoves').text(numberOfMoves);
           $('.stopWatch').text(time);
           $('#scoreBoardCustom').show();
@@ -495,9 +510,11 @@ $(document).ready(function() {
       //Reset button
       $('#resetButtonCustom').click(function() {
         reset();
+        generateBoard();
         $('#scoreBoardCustom').hide();
         $('#custom form').show();
         $('.intro').show();
+        $('input').val('');
       })
 
 
@@ -510,6 +527,11 @@ $(document).ready(function() {
           if (e.keyCode == 38 && gameStatus === "inPlay") {movement = [0,0,1,0]; speedControl()};
           if (e.keyCode == 40 && gameStatus === "inPlay") {movement = [0,0,0,1]; speedControl()};
         });
+
+        //********** Reset when switch tabs **********
+        $('.nav-tabs li:nth-child(1), .nav-tabs li:nth-child(2)').click(function() {reset()})
+        //Multiplayer & custom default grid
+        $('.nav-tabs li:nth-child(3), .nav-tabs li:nth-child(4)').click(function() {reset(); generateBoard();})
 
 //********** No Scroll plug-in **********//
 window.addEventListener("keydown", function(e) {
