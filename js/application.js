@@ -485,11 +485,17 @@ $(document).ready(function() {
         //********** Custom mode **********
 
         //Preview board
-        $('#xaxisInputCustom, #yaxisInputCustom, #wallThicknessInput').keyup(function() {
+        $('#custom form').keyup(function() {
           reset();
-          if (parseInt($('#xaxisInputCustom').val()) >= 2) {   xaxis = parseInt($('#xaxisInputCustom').val())};
-          if (parseInt($('#yaxisInputCustom').val()) >= 2) {   yaxis = parseInt($('#yaxisInputCustom').val())};
+          if (parseInt($('#xaxisInputCustom').val()) >= 2) {xaxis =   parseInt($('#xaxisInputCustom').val())};
+          if (parseInt($('#yaxisInputCustom').val()) >= 2) {yaxis =   parseInt($('#yaxisInputCustom').val())};
           if (parseInt($('#wallThicknessInput').val()) >= 1) { wallthickness = parseInt($('#wallThicknessInput').val())};
+          head[1] = 1 + wallthickness;
+          head[0] = 1 + wallthickness;
+          var headXaxis = parseInt($('#headXaxis').val());
+          var headYaxis = parseInt($('#headYaxis').val());
+          if (headXaxis >= 1 && headXaxis <= xaxis) {       head[1] = headXaxis - 1 + wallthickness};
+          if (headYaxis >= 1 && headYaxis <= yaxis) {       head[0] = headYaxis - 1 + wallthickness};
           generateBoard();
         })
 
