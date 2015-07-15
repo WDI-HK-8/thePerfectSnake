@@ -59,9 +59,29 @@ label {
   color: white
 }
 
-.form-inline {
+
+.form-inline .form-control {
+  width: 50px;
   text-align: center;
 }
+#xaxisInputMulti, #xaxisInputCustom {
+  margin-right: 50px
+}
+#wallThicknessInput {
+  margin-left: 88px
+}
+#foodValueInput {
+  margin-left: 124px
+}
+#initialC {
+  margin-left: 86px
+}
+#moveInterval {
+  margin-left: 160px
+}
+
+
+
 
 .navbar {
   background-color: black;
@@ -78,7 +98,7 @@ td {
   min-height:50px;
 }
 .sidebar {
-  width: 340px;
+  width: 342px;
   border-right: 3px solid white;
   border-left: 3px solid white
 }
@@ -139,11 +159,11 @@ td {
   font-size: 24px;
   color: black
 }
-#resetButtonOriginal, #resetButtonMulti, #resetButtonArcade, #resetButtonCustom,#nextLevelArcade {
+#resetButtonOriginal, #resetButtonMulti, #resetButtonArcade, #resetButtonCustom,#nextLevelArcade, #nextPlayerButton {
   margin-top: 20px
 }
-#startButtonOriginal, #startButtonMulti, #startButtonArcade, #startButtonCustom {
-  margin-top: 30px;
+#startButtonOriginal, #startButtonArcade, #startButtonMulti, #startButtonCustom {
+  margin-top: 25px;
   margin-left: 120px
 }
 #buttonGroupOriginal {
@@ -178,14 +198,7 @@ td {
   text-align: center;
 }
 
-/*.form-control {
-  width: 100px;
-  border-radius: 0px
-}
-.playerList .form-control {
-  width: 100%
-}*/
-/********** Fonts ***********/
+
 @font-face {
   font-family: "Gtek";
   src: url('../fonts/Gtek.ttf') format('truetype');

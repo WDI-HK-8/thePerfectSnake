@@ -35,6 +35,8 @@
     <div class="sidebar">
       <div class="sidebarcontent">
         <div class="tab-content">
+
+          <!-- Original tab -->
           <div role="tabpanel" class="tab-pane active" id="original">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
             <p class="intro">The legendary snake. This game dates back to the early 70's, and still remains as one of the greatest in the history of video gaming. Choose your speed, sit back and enjoy. No further instructions, none is required. </p>
@@ -59,11 +61,7 @@
             <button type="button" id="startButtonOriginal" class="btn btn-default">Start</button>
           </div>
 
-
-
-
-
-
+          <!-- Arcade tab -->
           <div role="tabpanel" class="tab-pane" id="arcade">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
             <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
@@ -89,8 +87,7 @@
             <button type="button" id="startButtonArcade" class="btn btn-default">Start</button>
           </div>
 
-
-
+          <!-- Multiplayer tab -->
           <div role="tabpanel" class="tab-pane" id="multiplayer">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
             <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
@@ -118,17 +115,20 @@
               <input type="text" class="form-control" placeholder="Player 2">
             </form>
             <button type="button" id="addNewPlayerButton" class="btn btn-default">Add new player</button><br>
-            <form class="form-horizontal">
-              <label class="intro" for="xaxisMulti">X-Axis</label>
-              <input type="text" class="form-control" id="xaxisInputMulti" placeholder="4">
-              <label class="intro" for="yaxisMulti">Y-Axis</label>
-              <input type="text" class="form-control" id="yaxisInputMulti" placeholder="4">
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="intro" for="xaxisMulti">X-Axis</label>
+                <input type="text" class="form-control" id="xaxisInputMulti" placeholder="4">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="yaxisMulti">Y-Axis</label>
+                <input type="text" class="form-control" id="yaxisInputMulti" placeholder="4">
+              </div>
               <button type="button" id="startButtonMulti" class="btn btn-default">Start</button>
             </form>
           </div>
 
-
-
+          <!-- Custom tab -->
           <div role="tabpanel" class="tab-pane" id="custom">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
             <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
@@ -142,19 +142,32 @@
               <button type="button" id="resetButtonCustom" class="btn btn-default">Reset</button>
             </div>
             <img class="lineBreaks" src="images/fancy1.png">
-            <form class="form-horizontal">
-              <label class="intro" for="xaxisCustom">X-Axis</label>
-              <input type="text" class="form-control" id="xaxisInputCustom" placeholder="4">
-              <label class="intro" for="yaxisCustom">Y-Axis</label>
-              <input type="text" class="form-control" id="yaxisInputCustom" placeholder="4">
-              <label class="intro" for="wallT">Wall thickness</label>
-              <input type="text" class="form-control" id="wallThicknessInput" placeholder="1">
-              <label class="intro" for="foodV">Food value</label>
-              <input type="text" class="form-control" id="foodValueInput" placeholder="1">
-              <label class="intro" for="initialC">Starting length</label>
-              <input type="text" class="form-control" id="initialC" placeholder="1">
-              <label class="intro" for="moveInterval">Interval</label>
-              <input type="text" class="form-control" id="moveInterval" placeholder="0">
+
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="intro" for="xaxisCustom">X-Axis</label>
+                <input type="text" class="form-control" id="xaxisInputCustom" placeholder="4">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="yaxisCustom">Y-Axis</label>
+                <input type="text" class="form-control" id="yaxisInputCustom" placeholder="4">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="wallT">Wall thickness</label>
+                <input type="text" class="form-control" id="wallThicknessInput" placeholder="1">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="foodV">Food value</label>
+                <input type="text" class="form-control" id="foodValueInput" placeholder="1">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="initialC">Starting length</label>
+                <input type="text" class="form-control" id="initialC" placeholder="1">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="moveInterval">Interval</label>
+                <input type="text" class="form-control" id="moveInterval" placeholder="0">
+              </div>
               <button type="button" id="startButtonCustom" class="btn btn-default">Start</button>
             </form>
           </div>
