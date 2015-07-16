@@ -39,7 +39,7 @@
           <!-- Original tab -->
           <div role="tabpanel" class="tab-pane active" id="original">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
-            <p class="intro">The legendary snake. This game dates back to the early 70's, and still remains as one of the greatest in the history of video gaming. Choose your speed, sit back and enjoy. No further instructions, none is required. </p>
+            <p class="intro">The legendary snake. This game dates back to the early 70's, and still remains as one of the greatest in the history of video gaming. Choose your speed, sit back and enjoy. No further instruction, none is required. </p>
             <div id="scoreBoardOriginal">
               <h1>Time</h1>
               <span class="stopWatch">0</span>
@@ -64,7 +64,7 @@
           <!-- Arcade tab -->
           <div role="tabpanel" class="tab-pane" id="arcade">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
-            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
+            <p class="intro">This is no ordinary snake. Now your aim is to play every game perfectly. That is, to cover the entire board with your snake. Starting with a 2x2 grid, then 3x3,  4x4... and so on. Good luck with passing level 2.</p>
             <div id="scoreBoardArcade">
               <h1 id="levelDisplay">Level 1</h1>
               <h2 id="gridSize">2 x 2 grid</h2>
@@ -90,7 +90,7 @@
           <!-- Multiplayer tab -->
           <div role="tabpanel" class="tab-pane" id="multiplayer">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
-            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
+            <p class="intro">Bored playing on your own? Feels like you are good at this? It's time for some competitions. Invite your (imaginary) friends, type in any grid size and have fun!</p>
             <div id="scoreBoardMulti">
               <h1 id="whosTurn"></h1>
               <h1>Time</h1>
@@ -117,11 +117,11 @@
             <button type="button" id="addNewPlayerButton" class="btn btn-default">Add new player</button><br>
             <form class="form-inline">
               <div class="form-group">
-                <label class="intro" for="xaxisMulti">X-Axis</label>
+                <label class="intro" for="xaxisMulti" data-toggle="tooltip" data-placement="bottom" title="Width of your grid">X-Axis</label>
                 <input type="text" class="form-control" id="xaxisInputMulti" placeholder="4">
               </div>
               <div class="form-group">
-                <label class="intro" for="yaxisMulti">Y-Axis</label>
+                <label class="intro" for="yaxisMulti" data-toggle="tooltip" data-placement="bottom" title="Height of your grid">Y-Axis</label>
                 <input type="text" class="form-control" id="yaxisInputMulti" placeholder="4">
               </div>
               <button type="button" id="startButtonMulti" class="btn btn-default">Start</button>
@@ -131,7 +131,7 @@
           <!-- Custom tab -->
           <div role="tabpanel" class="tab-pane" id="custom">
             <img class="lineBreaks" src="images/transparent-scroll-line.png">
-            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
+            <p class="intro">Now you have the chance to build your very own snake game, hover on each option to see what it means. Reverse mode is strongly recommended.</p>
             <div id="scoreBoardCustom">
               <h1>Time</h1>
               <span class="stopWatch">0</span>
@@ -144,27 +144,27 @@
             <img class="lineBreaks" src="images/fancy1.png">
             <form class="form-inline">
               <div class="form-group">
-                <label class="intro" for="xaxisCustom">X-Axis</label>
+                <label class="intro" for="xaxisCustom" data-toggle="tooltip" data-placement="top" title="Width of your grid">X-Axis</label>
                 <input type="text" class="form-control" id="xaxisInputCustom" placeholder="4">
               </div>
               <div class="form-group">
-                <label class="intro" for="yaxisCustom">Y-Axis</label>
+                <label class="intro" for="yaxisCustom" data-toggle="tooltip" data-placement="top" title="Height of your grid">Y-Axis</label>
                 <input type="text" class="form-control" id="yaxisInputCustom" placeholder="4">
               </div>
               <div class="form-group">
-                <label class="intro" for="headXaxis">Head-X</label>
+                <label class="intro" for="headXaxis" data-toggle="tooltip" data-placement="top" title="Starting position (X-axis)">Head-X</label>
                 <input type="text" class="form-control" id="headXaxis" placeholder="2">
               </div>
               <div class="form-group">
-                <label class="intro" for="headYaxis">Head-Y</label>
+                <label class="intro" for="headYaxis" data-toggle="tooltip" data-placement="top" title="Starting position (Y-axis)">Head-Y</label>
                 <input type="text" class="form-control" id="headYaxis" placeholder="2">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label class="intro" for="wallT">Wall thickness</label>
                 <input type="text" class="form-control" id="wallThicknessInput" placeholder="1">
-              </div>
+              </div> -->
               <div class="form-group">
-                <label class="intro" for="foodV">Food value</label>
+                <label class="intro" for="foodV" data-toggle="tooltip" data-placement="top" title="Growth rate of the snake">Food value</label>
                 <input type="text" class="form-control" id="foodValueInput" placeholder="1">
               </div>
               <div class="form-group">
@@ -172,14 +172,14 @@
                 <input type="text" class="form-control" id="initialC" placeholder="1">
               </div>
               <div class="form-group">
-                <label class="intro" for="moveInterval">Interval</label>
+                <label class="intro" for="moveInterval" data-toggle="tooltip" data-placement="top" title="The delay between each move in seconds">Moving interval</label>
                 <input type="text" class="form-control" id="moveInterval" placeholder="0">
               </div>
 
-              <div class="form-group appearance">
+              <!-- <div class="form-group appearance">
                 <label class="intro" for="wallColorInput">Wall color</label>
                 <input type="text" class="form-control" id="wallColorInput" placeholder="Black">
-              </div>
+              </div> -->
               <div class="form-group appearance">
                 <label class="intro" for="headColorInput">Head color</label>
                 <input type="text" class="form-control" id="headColorInput" placeholder="Green">
@@ -196,7 +196,7 @@
                 <label class="intro" for="foodColorInput">Food color</label>
                 <input type="text" class="form-control" id="foodColorInput" placeholder="Red">
               </div>
-              <label>Reverse</label>
+              <label data-toggle="tooltip" data-placement="top" title="Invert control">Reverse</label>
               <div class="btn-group " id="buttonGroupCustom" role="group">
                 <button type="button" id="reverseFalse" class="btn btn-default active">No</button>
                 <button type="button" id="reverseTrue" class="btn btn-default">Yes</button>
@@ -209,7 +209,7 @@
     </div>
 
 	  <div id="main">
-      <container class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-xs-12">
+      <container class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
         <div class="table-responsive">
           <table class="table">
             <tbody>
