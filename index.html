@@ -142,7 +142,6 @@
               <button type="button" id="resetButtonCustom" class="btn btn-default">Reset</button>
             </div>
             <img class="lineBreaks" src="images/fancy1.png">
-
             <form class="form-inline">
               <div class="form-group">
                 <label class="intro" for="xaxisCustom">X-Axis</label>
@@ -151,6 +150,14 @@
               <div class="form-group">
                 <label class="intro" for="yaxisCustom">Y-Axis</label>
                 <input type="text" class="form-control" id="yaxisInputCustom" placeholder="4">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="headXaxis">Head-X</label>
+                <input type="text" class="form-control" id="headXaxis" placeholder="2">
+              </div>
+              <div class="form-group">
+                <label class="intro" for="headYaxis">Head-Y</label>
+                <input type="text" class="form-control" id="headYaxis" placeholder="2">
               </div>
               <div class="form-group">
                 <label class="intro" for="wallT">Wall thickness</label>
@@ -168,28 +175,49 @@
                 <label class="intro" for="moveInterval">Interval</label>
                 <input type="text" class="form-control" id="moveInterval" placeholder="0">
               </div>
+
+              <div class="form-group appearance">
+                <label class="intro" for="wallColorInput">Wall color</label>
+                <input type="text" class="form-control" id="wallColorInput" placeholder="Black">
+              </div>
+              <div class="form-group appearance">
+                <label class="intro" for="headColorInput">Head color</label>
+                <input type="text" class="form-control" id="headColorInput" placeholder="Green">
+              </div>
+              <div class="form-group appearance">
+                <label class="intro" for="snakeColorInput">Snake color</label>
+                <input type="text" class="form-control" id="snakeColorInput" placeholder="Blue">
+              </div>
+              <div class="form-group appearance">
+                <label class="intro" for="backgroundColorInput">Background color</label>
+                <input type="text" class="form-control" id="backgroundColorInput" placeholder="White">
+              </div>
+              <div class="form-group appearance">
+                <label class="intro" for="foodColorInput">Food color</label>
+                <input type="text" class="form-control" id="foodColorInput" placeholder="Red">
+              </div>
+              <label>Reverse</label>
+              <div class="btn-group " id="buttonGroupCustom" role="group">
+                <button type="button" id="reverseFalse" class="btn btn-default active">No</button>
+                <button type="button" id="reverseTrue" class="btn btn-default">Yes</button>
+              </div>
               <button type="button" id="startButtonCustom" class="btn btn-default">Start</button>
             </form>
           </div>
-
-
-
         </div>
       </div>
     </div>
 
-
-
-      <div id="main">
-        <container class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-xs-12">
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </container>
-      </div>
+	  <div id="main">
+      <container class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-xs-12">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </container>
+    </div>
 
   </body>
 </html>

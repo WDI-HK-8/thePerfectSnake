@@ -5,7 +5,9 @@ body {
     background-repeat: no-repeat;
     background-position: left top;
 }
-
+tbody {
+  resize: none
+}
 p {
   font-family: 'babyui';
   color: black;
@@ -63,20 +65,47 @@ label {
   width: 50px;
   text-align: center;
 }
+.appearance .form-control {
+  width: 100px;
+  text-align: left;
+}
 #xaxisInputMulti, #xaxisInputCustom {
-  margin-right: 50px
+  margin-right: 30px;
+  margin-left: 10px
+}
+#headXaxis {
+  margin-left: 2px;
+  margin-right: 30px;
+}
+#headYaxis {
+  margin-left: 2px;
+}
+#yaxisInputMulti, #yaxisInputCustom {
+  margin-left: 10px
 }
 #wallThicknessInput {
-  margin-left: 88px
+  margin-left: 89px
 }
 #foodValueInput {
   margin-left: 124px
 }
 #initialC {
-  margin-left: 86px
+  margin-left: 87px
 }
 #moveInterval {
-  margin-left: 160px
+  margin-left: 161px
+}
+#wallColorInput {
+  margin-left: 82px
+}
+#headColorInput {
+  margin-left: 75px
+}
+#snakeColorInput {
+  margin-left: 61px
+}
+#foodColorInput {
+  margin-left: 74px
 }
 
 
@@ -167,6 +196,9 @@ td {
 }
 #buttonGroupOriginal {
   margin-top: 10px
+}
+#buttonGroupCustom {
+  margin-left: 100px
 }
 
 #resetButtonOriginal, #resetButtonArcade, #resetButtonMulti, #resetButtonCustom {
