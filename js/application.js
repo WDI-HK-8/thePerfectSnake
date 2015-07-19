@@ -1,6 +1,8 @@
 $(document).ready(function() {
   //Resize plug-in
-  $(window).resize(function() { $('td').each(function(){$(this).css({"height":$(this).width()});}) })
+  $(window).resize(function() { $('td').each(function(){$(this).css({"height":$(this).width()})});$('table').css({"margin": $('td').width()*(-1)}) })
+  //Tooltips active
+  $(function () {$('[data-toggle="tooltip"]').tooltip()})
   //Global variables
   var board = [];
   var xaxis = 4;
@@ -24,9 +26,9 @@ $(document).ready(function() {
   var gameMode;
   var index = 0; //Use only in multiplayer mode (index of who is playing)
   var level = 1; //Use only in arcade mode
-  var wallColor = 'black';
-  var headColor = 'green';
-  var snakeColor = 'blue';
+  var wallColor = 'transparent';
+  var headColor = 'black';
+  var snakeColor = 'brown';
   var backgroundColor = 'white';
   var foodColor = 'red';
   var reverse = false;
@@ -219,7 +221,8 @@ $(document).ready(function() {
           for (i=0; i < xaxis+2*wallthickness; i+=1) {
               for (j=0; j < yaxis+2*wallthickness; j+=1) {
                   if (board[j][i] === 8) {
-                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":wallColor})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":'transparent'})
+                    $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"box-shadow":'none'})
                   }else if (board[j][i] > 0 ){
                     $('.table tbody tr:nth-child(' + (j+1) + ') td:nth-child(' + (i+1) + ')').css({"background-color":snakeColor}); gridsCovered++
                   }else if (board[j][i] < 0 ){
@@ -269,9 +272,9 @@ $(document).ready(function() {
         $('#gridSize').text('2 x 2 grid');
         index = 0;
         level = 1;
-        wallColor = 'black';
-        headColor = 'green';
-        snakeColor = 'blue';
+        wallColor = 'transparent';
+        headColor = 'black';
+        snakeColor = 'brown';
         backgroundColor = 'white';
         foodColor = 'red';
         reverse = false;
@@ -290,7 +293,10 @@ $(document).ready(function() {
             $('.table tbody tr:nth-child(' + i + ')').append('<td></td>')
           }
         }
-        $('td').each(function(){$(this).css({"height":$(this).width()});})
+        $('td').each(function(){$(this).css({"height":$(this).width()})})
+        $('table').css({"margin": $('td').width()*(-1)})
+        $('td').css({"border-color":'transparent'})
+
         //Engine setup
         for (i=0; i < yaxis+2*wallthickness; i+=1) {
           board[i] = [];
@@ -352,8 +358,8 @@ $(document).ready(function() {
         if (interval === 0) {
           interval = 150;
         }
-        xaxis = 25;
-        yaxis = 20;
+        xaxis = 20;
+        yaxis = 15;
         generateBoard();
         $('.numberOfMoves').text(numberOfMoves);
         $('.stopWatch').text(time);
